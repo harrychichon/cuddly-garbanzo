@@ -1,19 +1,22 @@
 import { View } from '@/components/Themed';
-import TournamentCard from '@/components/TournamentCard';
+import TournamentCard from '@/components/tournament/TournamentCard';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 export default function TabOneScreen() {
+	const router = useRouter();
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<View style={styles.container}>
 				<TournamentCard
+					onPress={() => router.push('/create-tournament')}
 					title='Americano'
 					imageSource={require('@/assets/images/singles.jpg')}
 					description='This is a description of Tournament 1'
 				/>
 				<TournamentCard
+					onPress={() => router.push('/create-tournament')}
 					title='Americano Doubles'
 					imageSource={require('@/assets/images/doubles.jpg')}
 					description='This is a description of Tournament 2'
