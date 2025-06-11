@@ -1,10 +1,7 @@
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { darkNavigationTheme, lightNavigationTheme } from '@/design-tokens';
+import { useAppTheme } from '@/hooks';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import {
-	DarkTheme,
-	DefaultTheme,
-	ThemeProvider,
-} from '@react-navigation/native';
+import { ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -50,10 +47,11 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-	const colorScheme = useColorScheme();
+	// const colorScheme = useColorScheme();
+	const { isDark } = useAppTheme();
 
 	return (
-		<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+		<ThemeProvider value={isDark ? darkNavigationTheme : lightNavigationTheme}>
 			<SafeAreaProvider>
 				<Stack>
 					<Stack.Screen

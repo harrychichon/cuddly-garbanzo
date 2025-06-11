@@ -1,4 +1,7 @@
+import { shadows, sizes } from '@/design-tokens';
+import { useAppTheme } from '@/hooks';
 import {
+	Dimensions,
 	Image,
 	ImageSourcePropType,
 	Pressable,
@@ -13,38 +16,48 @@ type TournamentCardProps = {
 	imageSource: ImageSourcePropType;
 	onPress?: () => void;
 };
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
+const cardWidth = (screenWidth - sizes.base.spacing * 3) / 2;
+const cardHeight = screenHeight * 0.3;
 
 const TournamentCard = ({
 	title,
 	imageSource,
 	description,
 	onPress,
-}: TournamentCardProps) => (
-	<Pressable onPress={onPress}>
-		<View style={[styles.card]}>
-			<Text>{title}</Text>
-			<Image
-				source={imageSource}
-				style={{ width: 100, height: 100 }}
-			/>
-			<Text>{description}</Text>
-		</View>
-	</Pressable>
-);
+}: TournamentCardProps) => {
+	const { colors: themeColors } = useAppTheme();
+
+	return (
+		<Pressable onPress={onPress}>
+			<View
+				style={[
+					styles.card,
+					{
+						backgroundColor: themeColors.colors.background,
+					},
+				]}>
+				<Text style={{ color: themeColors.colors.text }}>{title}</Text>
+				<Image
+					source={imageSource}
+					style={{ width: 100, height: 100 }}
+				/>
+				<Text style={{ color: themeColors.colors.text }}>{description}</Text>
+			</View>
+		</Pressable>
+	);
+};
 
 const styles = StyleSheet.create({
 	card: {
+		height: cardHeight,
+		width: cardWidth,
 		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: 'white',
-		borderRadius: 8,
-		padding: 16,
-		margin: 8,
-		shadowColor: '#000',
-		shadowOffset: { width: 0, height: 2 },
-		shadowOpacity: 0.1,
-		shadowRadius: 4,
-		elevation: 3,
+		borderRadius: sizes.base.radius,
+		padding: sizes.base.spacing,
+		margin: sizes.spacing.sm,
+		...shadows.moderate,
 	},
 });
 

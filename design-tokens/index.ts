@@ -1,4 +1,5 @@
-export * from './colors';
-export * from './shadows';
-export * from './sizes';
-export * from './typography';
+export { default as colors } from './colors';
+export * from './navigation-themes';
+export { default as shadows } from './shadows';
+export { default as sizes } from './sizes';
+export { default as typography } from './typography';
