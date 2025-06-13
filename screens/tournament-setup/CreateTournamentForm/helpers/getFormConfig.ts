@@ -1,7 +1,19 @@
-import { MATCH_FORMATS, SCORING, TournamentFormat } from '@/configs';
+import { MATCH_FORMATS, TournamentFormat } from '@/configs';
 import { FormConfig, FormField } from '../types';
 
-const getFormConfig = (selectedFormat: TournamentFormat): FormConfig => {
+export const calculateMaxCourts = (
+	format: TournamentFormat,
+	participantCount: number
+): number => {
+	// For singles: each match needs 2 players, so max courts = players / 2
+	// For doubles: each match needs 2 teams (4 players), so max courts = teams / 2
+	return Math.floor(participantCount / 2);
+};
+
+const getFormConfig = (
+	selectedFormat: TournamentFormat,
+	participantCount?: number
+): FormConfig => {
 	const today = new Date().toISOString().split('T')[0];
 	const defaultTournamentName = `${selectedFormat.name} ${today}`;
 
@@ -27,19 +39,9 @@ const getFormConfig = (selectedFormat: TournamentFormat): FormConfig => {
 				} Games`,
 			})),
 		},
-		{
-			name: 'scoring',
-			type: 'slider',
-			label: 'Scoring System',
-			required: true,
-			min: SCORING.min,
-			max: SCORING.max,
-			step: 1,
-			unit: 'points',
-		},
 	];
 
-	// Add format-specific fields
+	// Add format-specific participant count field
 	const formatSpecificField: FormField =
 		selectedFormat.type === 'singles'
 			? {
@@ -63,16 +65,36 @@ const getFormConfig = (selectedFormat: TournamentFormat): FormConfig => {
 					unit: 'teams',
 			  };
 
+	// Add courts field dynamically based on participant count
+	const courtsField: FormField | null = participantCount
+		? {
+				name: 'courtCount',
+				type: 'slider',
+				label: 'Number of Courts',
+				required: true,
+				min: 1,
+				max: calculateMaxCourts(selectedFormat, participantCount),
+				step: 1,
+				unit: 'courts',
+		  }
+		: null;
+
+	const allFields = courtsField
+		? [...baseFields, formatSpecificField, courtsField]
+		: [...baseFields, formatSpecificField];
+
+	const defaultParticipantCount =
+		selectedFormat.type === 'singles'
+			? selectedFormat.playerRange.min
+			: selectedFormat.teamRange.min;
+
 	return {
-		fields: [...baseFields, formatSpecificField],
+		fields: allFields,
 		defaultValues: {
 			tournamentName: defaultTournamentName,
-			matchFormat: 'BEST_OF_ONE',
-			scoringSystem: 'TRADITIONAL',
-			[formatSpecificField.name]:
-				selectedFormat.type === 'singles'
-					? selectedFormat.playerRange.min
-					: selectedFormat.teamRange.min,
+			matchFormat: 'BEST_OF_ONE' as keyof typeof MATCH_FORMATS,
+			[formatSpecificField.name]: defaultParticipantCount,
+			...(courtsField && { courtCount: 1 }),
 		},
 	};
 };

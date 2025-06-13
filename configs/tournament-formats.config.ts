@@ -5,6 +5,7 @@ export type TournamentFormat = {
 	available: boolean;
 	image: ImageSourcePropType;
 	summary: string;
+	courtCount?: number;
 } & (
 	| {
 			type: 'singles';

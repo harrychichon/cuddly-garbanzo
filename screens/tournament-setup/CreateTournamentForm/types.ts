@@ -6,6 +6,7 @@ export type TournamentFormData = {
 	matchFormat: keyof typeof MATCH_FORMATS;
 	scoringSystem: keyof typeof SCORING;
 	formatType: keyof typeof TOURNAMENT_FORMATS;
+	courtCount?: number;
 } & ({ playerCount: number } | { teamCount: number });
 
 export const isSinglesFormat = (
