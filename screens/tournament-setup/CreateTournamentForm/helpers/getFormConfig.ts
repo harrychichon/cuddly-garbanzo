@@ -5,8 +5,6 @@ export const calculateMaxCourts = (
 	format: TournamentFormat,
 	participantCount: number
 ): number => {
-	// For singles: each match needs 2 players, so max courts = players / 2
-	// For doubles: each match needs 2 teams (4 players), so max courts = teams / 2
 	return Math.floor(participantCount / 2);
 };
 
@@ -41,7 +39,6 @@ const getFormConfig = (
 		},
 	];
 
-	// Add format-specific participant count field
 	const formatSpecificField: FormField =
 		selectedFormat.type === 'singles'
 			? {
@@ -65,7 +62,6 @@ const getFormConfig = (
 					unit: 'teams',
 			  };
 
-	// Add courts field dynamically based on participant count
 	const courtsField: FormField | null = participantCount
 		? {
 				name: 'courtCount',

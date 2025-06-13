@@ -41,7 +41,7 @@ const CreateTournamentForm = ({
 		// Add format type to the data
 		const formattedData = {
 			...data,
-			formatType: selectedFormat.name, // or use a key if you have one
+			formatType: selectedFormat.name,
 		} as TournamentFormData;
 
 		onSubmit(formattedData);
