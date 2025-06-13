@@ -1,6 +1,7 @@
-import Slider from '@react-native-community/slider';
+import InputSlider from '@/components/InputSlider';
+import InputText from '@/components/InputText';
 import { Control, Controller } from 'react-hook-form';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { FormField, TournamentFormData } from '../types';
 
 type FormFieldRendererProps = {
@@ -22,15 +23,13 @@ export const FormFieldRenderer = ({
 					name={field.name as keyof TournamentFormData}
 					control={control}
 					render={({ field: { onChange, value } }) => (
-						<View>
-							<Text>{field.label}</Text>
-							<TextInput
-								value={value}
-								onChangeText={onChange}
-								placeholder={field.placeholder}
-								maxLength={field.maxLength}
-							/>
-						</View>
+						<InputText
+							label={field.label}
+							value={value}
+							onChangeText={onChange}
+							defaultValue={field.defaultValue}
+							maxLength={field.maxLength}
+						/>
 					)}
 				/>
 			);
@@ -45,22 +44,31 @@ export const FormFieldRenderer = ({
 							name={field.name as keyof TournamentFormData}
 							control={control}
 							render={({ field: { onChange, value } }) => (
-								<TouchableOpacity
-									onPress={() => onChange(option.value)}
-									style={{
-										padding: 10,
-										backgroundColor:
-											value === option.value ? '#007AFF' : '#f0f0f0',
-										margin: 2,
-										borderRadius: 5,
-									}}>
-									<Text
+								<>
+									{/* //TODO Fixa den här
+									// <InputSelect
+										option={option}
+										value={option.value}
+										onPress={() => onChange(option.value)}
+									/> */}
+									<TouchableOpacity
+										onPress={() => onChange(option.value)}
 										style={{
-											color: value === option.value ? 'white' : 'black',
+											padding: 10,
+											backgroundColor:
+												value === option.value ? '#ff5845' : '#ffffff',
+											margin: 2,
+											borderRadius: 5,
 										}}>
-										{option.label}
-									</Text>
-								</TouchableOpacity>
+										<Text
+											style={{
+												color: value === option.value ? 'white' : 'black',
+												fontWeight: value === option.value ? 700 : 400,
+											}}>
+											{option.label}
+										</Text>
+									</TouchableOpacity>
+								</>
 							)}
 						/>
 					))}
@@ -74,34 +82,15 @@ export const FormFieldRenderer = ({
 					name={field.name as keyof TournamentFormData}
 					control={control}
 					render={({ field: { onChange, value } }) => (
-						<View style={{ margin: 10 }}>
-							<Text style={{ marginBottom: 10 }}>
-								{field.label}: {value || field.min} {field.unit}
-							</Text>
-							<Slider
-								style={{ width: '100%', height: 40 }}
-								minimumValue={field.min}
-								maximumValue={field.max}
-								step={field.step || 1}
-								value={field.min}
-								onValueChange={onChange}
-								minimumTrackTintColor='#007AFF'
-								maximumTrackTintColor='#d3d3d3'
-							/>
-							<View
-								style={{
-									flexDirection: 'row',
-									justifyContent: 'space-between',
-									marginTop: 5,
-								}}>
-								<Text style={{ fontSize: 12, color: '#666' }}>
-									{field.min} {field.unit}
-								</Text>
-								<Text style={{ fontSize: 12, color: '#666' }}>
-									{field.max} {field.unit}
-								</Text>
-							</View>
-						</View>
+						<InputSlider
+							label={field.label}
+							units={field.unit}
+							minimumValue={field.min}
+							maximumValue={field.max}
+							value={value || field.min}
+							onValueChange={onChange}
+							step={1}
+						/>
 					)}
 				/>
 			);

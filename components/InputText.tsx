@@ -6,8 +6,8 @@ type TextInputProps = {
 	label: string;
 	value: string;
 	onChangeText: (text: string) => void;
-	defaultValue: string;
-	maxLength: number;
+	maxLength?: number;
+	defaultValue?: string;
 };
 
 const InputText = ({
@@ -31,6 +31,7 @@ const InputText = ({
 					borderRadius: theme.sizes.base.radius,
 					backgroundColor: theme.colors.white,
 					paddingStart: theme.sizes.base.spacing,
+					paddingEnd: theme.sizes.base.spacing,
 					borderWidth: theme.sizes.base.border,
 					borderColor: theme.colors.border,
 				},

@@ -1,7 +1,10 @@
 import { MATCH_FORMATS, SCORING, TournamentFormat } from '@/configs';
-import { FormConfig, FormField } from './types';
+import { FormConfig, FormField } from '../types';
 
 const getFormConfig = (selectedFormat: TournamentFormat): FormConfig => {
+	const today = new Date().toISOString().split('T')[0];
+	const defaultTournamentName = `${selectedFormat.name} ${today}`;
+
 	const baseFields: FormField[] = [
 		{
 			name: 'tournamentName',
@@ -9,6 +12,7 @@ const getFormConfig = (selectedFormat: TournamentFormat): FormConfig => {
 			label: 'Tournament Name',
 			required: true,
 			placeholder: 'Enter tournament name',
+			defaultValue: defaultTournamentName,
 			maxLength: 50,
 		},
 		{
@@ -62,7 +66,7 @@ const getFormConfig = (selectedFormat: TournamentFormat): FormConfig => {
 	return {
 		fields: [...baseFields, formatSpecificField],
 		defaultValues: {
-			tournamentName: '',
+			tournamentName: defaultTournamentName,
 			matchFormat: 'BEST_OF_ONE',
 			scoringSystem: 'TRADITIONAL',
 			[formatSpecificField.name]:

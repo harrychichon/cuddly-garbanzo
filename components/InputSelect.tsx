@@ -2,19 +2,19 @@ import { useAppTheme } from '@/hooks';
 import { useMemo } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-type SelectFieldRendererProps<T = any> = {
+type InputSelectProps<T = any> = {
 	option: { value: T; label: string };
-	isSelected: boolean;
-	onSelect: (value: T) => void;
+	value: T;
+	onPress: (value: T) => void;
 };
 
-const SelectFieldRenderer = ({
+const InputSelect = <T,>({
 	option,
-	isSelected,
-	onSelect,
-}: Readonly<SelectFieldRendererProps>) => {
+	value,
+	onPress,
+}: Readonly<InputSelectProps<T>>) => {
 	const { theme } = useAppTheme();
-
+	const isSelected = value === option.value;
 	const styles = useMemo(
 		() =>
 			StyleSheet.create({
@@ -30,15 +30,15 @@ const SelectFieldRenderer = ({
 					color: isSelected ? theme.colors.white : theme.colors.black,
 				},
 			}),
-		[theme]
+		[theme, isSelected]
 	);
 	return (
 		<TouchableOpacity
-			onPress={() => onSelect(option.value)}
+			onPress={() => onPress(option.value)}
 			style={styles.select}>
 			<Text style={styles.text}>{option.label}</Text>
 		</TouchableOpacity>
 	);
 };
 
-export default SelectFieldRenderer;
+export default InputSelect;

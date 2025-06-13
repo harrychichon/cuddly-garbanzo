@@ -5,12 +5,12 @@ import { StyleSheet, Text, View } from 'react-native';
 
 type InputSliderProps = {
 	label: string;
-	units: string;
 	minimumValue: number;
 	maximumValue: number;
-	step?: number;
-	value: number;
+	value: string | number;
 	onValueChange: (value: number) => void;
+	units?: string;
+	step?: number;
 };
 
 const InputSlider = ({
@@ -30,6 +30,7 @@ const InputSlider = ({
 				container: { width: '100%', gap: theme.sizes.spacing.sm },
 				slider: {
 					width: '100%',
+					height: 40,
 				},
 			}),
 		[theme]
@@ -39,12 +40,12 @@ const InputSlider = ({
 			<Text style={{ marginBottom: 10 }}>
 				{label}: {value || minimumValue} {units}
 			</Text>
+
 			<Slider
-				style={styles.slider}
 				minimumValue={minimumValue}
 				maximumValue={maximumValue}
 				step={step ?? 1}
-				value={value}
+				value={typeof value === 'number' ? value : Number(value)}
 				onValueChange={onValueChange}
 				minimumTrackTintColor={theme.colors.primary}
 				maximumTrackTintColor={theme.colors.border}
@@ -54,6 +55,7 @@ const InputSlider = ({
 				style={{
 					flexDirection: 'row',
 					justifyContent: 'space-between',
+					marginTop: 5,
 				}}>
 				<Text style={{ fontSize: 12, color: theme.colors.textDim }}>
 					{minimumValue} {units}

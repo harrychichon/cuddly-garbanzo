@@ -28,6 +28,7 @@ type BaseField = {
 
 type TextField = BaseField & {
 	type: 'text';
+	defaultValue?: string;
 	placeholder?: string;
 	maxLength?: number;
 };

@@ -1,4 +1,4 @@
-const neutralLight = '#f2f2f2';
+const neutralLight = '#fcfbf6';
 const neutralDark = '#1a1a1a';
 const primaryColor = '#ff5845';
 const secondaryColor = '#00d999';

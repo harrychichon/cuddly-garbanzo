@@ -29,7 +29,6 @@ export default function CreateTournament() {
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<View style={styles.container}>
-				<Text>Create {selectedFormat.name}</Text>
 				<CreateTournamentForm
 					selectedFormat={selectedFormat}
 					onSubmit={() => {}}
