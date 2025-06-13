@@ -1,4 +1,4 @@
-const getValidCounts = (range: {
+const playerCountHelper = (range: {
 	min: number;
 	max: number;
 	step: number;
@@ -10,4 +10,4 @@ const getValidCounts = (range: {
 	return counts;
 };
 
-export default getValidCounts;
+export default playerCountHelper;

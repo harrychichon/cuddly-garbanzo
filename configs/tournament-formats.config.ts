@@ -2,6 +2,7 @@ import { ImageSourcePropType } from 'react-native';
 
 export type TournamentFormat = {
 	name: string;
+	available: boolean;
 	image: ImageSourcePropType;
 	summary: string;
 } & (
@@ -15,22 +16,36 @@ export type TournamentFormat = {
 	  }
 );
 
+export const getAvailableFormats = () =>
+	Object.entries(TOURNAMENT_FORMATS)
+		.filter(([_, format]) => format.available)
+		.map(([key, format]) => ({ formatId: key, ...format }));
+
+export const getTournamentFormat = (id: string): TournamentFormat | null => {
+	const format = TOURNAMENT_FORMATS[id];
+
+	if (!format || !format.available) {
+		return null;
+	}
+
+	return format;
+};
+
 export const MATCH_FORMATS = {
 	BEST_OF_ONE: { sets: 1, gamesPerSet: 6, tiebreakAt: 6 },
 	BEST_OF_THREE: { sets: 3, gamesPerSet: 6, tiebreakAt: 6 },
 	SHORT_SET: { sets: 1, gamesPerSet: 4, tiebreakAt: 4 },
-	SUPER_TIEBREAK: { sets: 1, pointsToWin: 10, winByTwo: true },
 };
 
-export const SCORING_SYSTEMS = {
-	TRADITIONAL: 'traditional', // 15-30-40
-	NUMERIC: 'numeric', // 1-2-3-4
-	NO_DEUCE: 'no_deuce', // First to 4 points wins
+export const SCORING = {
+	min: 4,
+	max: 32,
 };
 
 export const TOURNAMENT_FORMATS: Record<string, TournamentFormat> = {
 	AMERICANO_SINGLES: {
 		name: 'Americano Singles',
+		available: true,
 		image: require('@/assets/images/singles.jpg'),
 		summary:
 			'Americano är en spelform där alla spelar med alla. Passar för en social och jämn turnering.',
@@ -39,6 +54,7 @@ export const TOURNAMENT_FORMATS: Record<string, TournamentFormat> = {
 	},
 	AMERICANO_DOUBLES: {
 		name: 'Americano Doubles',
+		available: true,
 		image: require('@/assets/images/doubles.jpg'),
 		summary:
 			'Lag Americano är en variant där deltagarna spelar i lag och tävlar mot andra lag.',
@@ -47,6 +63,7 @@ export const TOURNAMENT_FORMATS: Record<string, TournamentFormat> = {
 	},
 	MEXICANO_SINGLES: {
 		name: 'Mexicano Singles',
+		available: true,
 		image: require('@/assets/images/singles.jpg'),
 		summary:
 			'Mexicano är en spelform där spelare möter likvärdigt motstånd baserat på tidigare resultat.',
@@ -55,6 +72,7 @@ export const TOURNAMENT_FORMATS: Record<string, TournamentFormat> = {
 	},
 	MEXICANO_DOUBLES: {
 		name: 'Mexicano Doubles',
+		available: true,
 		image: require('@/assets/images/doubles.jpg'),
 		summary:
 			'Lag Mexicano kombinerar lagspel med Mexicano-systemet där lagen möter likvärdigt motstånd.',
@@ -63,6 +81,7 @@ export const TOURNAMENT_FORMATS: Record<string, TournamentFormat> = {
 	},
 	BEAT_THE_BOX: {
 		name: 'Beat The Box',
+		available: true,
 		image: require('@/assets/images/singles.jpg'),
 		summary:
 			'Beat the box är en individuell spelform där spelarna tävlar om att samla mest poäng.',

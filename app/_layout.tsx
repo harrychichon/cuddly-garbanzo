@@ -47,7 +47,6 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-	// const colorScheme = useColorScheme();
 	const { isDark } = useAppTheme();
 
 	return (

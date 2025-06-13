@@ -1,28 +1,30 @@
 import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 import colors from './colors';
+import shadows from './shadows';
+import sizes from './sizes';
+import typography from './typography';
 
+const otherVariables = {
+	shadows: { ...shadows },
+	sizes: { ...sizes },
+	typography: { ...typography },
+};
+
+//TODO Hur gör jag för att färger ska hämtas dynamiskt från colors.ts?
 export const lightNavigationTheme = {
 	...DefaultTheme,
 	colors: {
 		...DefaultTheme.colors,
-		primary: colors.light.primary,
-		background: colors.light.background,
-		card: colors.light.background,
-		text: colors.light.text,
-		border: '#E5E5E7',
-		notification: colors.light.error,
+		...colors.light,
 	},
+	...otherVariables,
 };
 
 export const darkNavigationTheme = {
 	...DarkTheme,
 	colors: {
 		...DarkTheme.colors,
-		primary: colors.dark.primary,
-		background: colors.dark.background,
-		card: colors.dark.background,
-		text: colors.dark.text,
-		border: '#2C2C2E',
-		notification: colors.dark.error,
+		...colors.dark,
 	},
+	...otherVariables,
 };

@@ -1,2 +1,3 @@
-export * from './Themed';
-export * from './tournament/TournamentCard';
+export * from './Button';
+export * from './InputSlider';
+export * from './InputText';

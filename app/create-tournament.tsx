@@ -1,13 +1,54 @@
+import Button from '@/components/Button';
+import InputText from '@/components/InputText';
 import { View } from '@/components/Themed';
+import { getTournamentFormat } from '@/configs';
+import { sizes } from '@/design-tokens';
+import CreateTournamentForm from '@/screens/tournament-setup/CreateTournamentForm/CreateTournamentForm';
+import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function createTournament() {
+export default function CreateTournament() {
+	const { formatType } = useLocalSearchParams();
+
+	const selectedFormat = getTournamentFormat(formatType as string);
+
+	if (!selectedFormat) {
+		return (
+			<SafeAreaView style={{ flex: 1 }}>
+				<View style={styles.container}>
+					<Text>Invalid tournament format selected</Text>
+				</View>
+			</SafeAreaView>
+		);
+	}
+
+	console.log('Selected format:', formatType);
+
 	return (
 		<SafeAreaView style={{ flex: 1 }}>
 			<View style={styles.container}>
-				<Text>Create Tournament</Text>
+				<Text>Create {selectedFormat.name}</Text>
+				<CreateTournamentForm
+					selectedFormat={selectedFormat}
+					onSubmit={() => {}}
+				/>
+				<InputText
+					label='This is label'
+					value='Value'
+					onChangeText={() => undefined}
+					defaultValue='Def. Value'
+					maxLength={10}
+				/>
+				<Button
+					title='Tillbaka'
+					variant='negative'
+				/>
+				<Button
+					title='Nästa'
+					variant='positive'
+				/>
 			</View>
 		</SafeAreaView>
 	);
@@ -16,15 +57,9 @@ export default function createTournament() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		flexDirection: 'row',
-		flexWrap: 'wrap',
 		alignItems: 'center',
-		justifyContent: 'center',
+		justifyContent: 'flex-end',
 		gap: 4,
-	},
-	separator: {
-		marginVertical: 30,
-		height: 1,
-		width: '80%',
+		padding: sizes.base.spacing,
 	},
 });
