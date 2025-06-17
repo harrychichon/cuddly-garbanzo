@@ -62,7 +62,11 @@ function RootLayoutNav() {
 						options={{ headerShown: false }}
 					/>
 					<Stack.Screen
-						name='create-tournament'
+						name='tournament-setup'
+						options={{ headerShown: false }}
+					/>
+					<Stack.Screen
+						name='tournament-management'
 						options={{ headerShown: false }}
 					/>
 				</Stack>

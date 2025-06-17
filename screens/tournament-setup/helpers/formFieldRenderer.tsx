@@ -25,7 +25,7 @@ export const FormFieldRenderer = ({
 					render={({ field: { onChange, value } }) => (
 						<InputText
 							label={field.label}
-							value={value}
+							value={value as string}
 							onChangeText={onChange}
 							defaultValue={field.defaultValue}
 							maxLength={field.maxLength}

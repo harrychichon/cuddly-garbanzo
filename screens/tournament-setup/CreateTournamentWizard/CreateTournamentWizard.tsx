@@ -1,0 +1,256 @@
+import Button from '@/components/Button';
+import { calculateMaxCourts, TournamentFormat } from '@/configs';
+
+import { useTournamentStore } from '@/stores/tournamentStore';
+import { useRouter } from 'expo-router';
+import React, { useMemo, useState } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
+import { KeyboardAvoidingView, Text, View } from 'react-native';
+import { TournamentFormData } from '../types';
+import { FormatStep } from './Step1FormatStep';
+import { ParticipantsStep } from './Step2ParticipantStep';
+import { CourtsStep } from './Step3CourtsStep';
+import { MatchFormatStep } from './Step4MatchFormatStep';
+
+type CreateTournamentWizardProps = {
+	initialFormat?: TournamentFormat;
+	onSubmit?: () => void;
+	onCancel?: () => void;
+};
+
+const CreateTournamentWizard = ({
+	initialFormat,
+	onSubmit,
+	onCancel,
+}: Readonly<CreateTournamentWizardProps>) => {
+	const { createTournament } = useTournamentStore.getState();
+	const [currentStep, setCurrentStep] = useState(0);
+	const [selectedFormat, setSelectedFormat] = useState<TournamentFormat | null>(
+		initialFormat || null
+	);
+	const router = useRouter();
+
+	const today = new Date().toISOString().split('T')[0];
+	const defaultTournamentName = selectedFormat
+		? `${selectedFormat.name} ${today}`
+		: '';
+
+	const { control, handleSubmit, setValue, getValues, watch } =
+		useForm<TournamentFormData>({
+			defaultValues: {
+				tournamentName: defaultTournamentName,
+				matchFormat:
+					'BEST_OF_ONE' as keyof typeof import('@/configs').MATCH_FORMATS,
+				formatType:
+					selectedFormat?.name as keyof typeof import('@/configs').TOURNAMENT_FORMATS,
+				...(selectedFormat?.type === 'singles'
+					? { playerCount: selectedFormat.playerRange.min }
+					: { teamCount: selectedFormat?.teamRange?.min || 2 }),
+				courtCount: 1,
+			},
+		});
+
+	// Watch participant count for dynamic court calculation
+	const participantCountFieldName =
+		selectedFormat?.type === 'singles' ? 'playerCount' : 'teamCount';
+	const participantCount = useWatch({
+		control,
+		name: participantCountFieldName,
+		defaultValue:
+			selectedFormat?.type === 'singles'
+				? selectedFormat.playerRange.min
+				: selectedFormat?.teamRange?.min || 2,
+	});
+
+	// Calculate max courts based on participant count
+	const maxCourts = useMemo(() => {
+		if (!participantCount) return 1;
+		return calculateMaxCourts(participantCount as number);
+	}, [selectedFormat, participantCount]);
+
+	const steps = ['Tävlingsform & namn', 'Deltagare', 'Banor', 'Matchformat'];
+
+	const handleNext = () => {
+		if (currentStep < steps.length - 1) {
+			setCurrentStep(currentStep + 1);
+		}
+	};
+
+	const handlePrevious = () => {
+		if (currentStep > 0) {
+			setCurrentStep(currentStep - 1);
+		}
+	};
+
+	const handleFormatSelect = (format: TournamentFormat) => {
+		setSelectedFormat(format);
+		const newDefaultName = `${format.name} ${today}`;
+		setValue('tournamentName', newDefaultName);
+		setValue(
+			'formatType',
+			format.name as keyof typeof import('@/configs').TOURNAMENT_FORMATS
+		);
+
+		// Set default participant count
+		if (format.type === 'singles') {
+			setValue('playerCount', format.playerRange.min);
+		} else {
+			setValue('teamCount', format.teamRange.min);
+		}
+
+		// Reset court count when format changes
+		setValue('courtCount', 1);
+	};
+
+	const handleFormSubmit = async (data: TournamentFormData) => {
+		if (!selectedFormat?.name) return;
+
+		const formattedData = {
+			...data,
+			formatType: selectedFormat.name,
+		};
+
+		try {
+			await createTournament(formattedData);
+			router.push({
+				pathname: '/tournament-management',
+			});
+		} catch (err) {
+			console.error('Error creating tournament:', err);
+		}
+	};
+
+	const canProceedToNext = () => {
+		switch (currentStep) {
+			case 0:
+				return selectedFormat && getValues('tournamentName')?.trim();
+			case 1:
+				return (
+					participantCount &&
+					participantCount >=
+						(selectedFormat?.type === 'singles'
+							? selectedFormat.playerRange.min
+							: selectedFormat?.teamRange?.min || 2)
+				);
+			case 2:
+				return getValues('courtCount') >= 1;
+			case 3:
+				return getValues('matchFormat');
+			default:
+				return false;
+		}
+	};
+
+	const renderStep = () => {
+		switch (currentStep) {
+			case 0:
+				return (
+					<FormatStep
+						control={control}
+						selectedFormat={selectedFormat}
+						onFormatSelect={handleFormatSelect}
+					/>
+				);
+			case 1:
+				return selectedFormat ? (
+					<ParticipantsStep
+						control={control}
+						format={selectedFormat}
+						participantCount={participantCount as number}
+					/>
+				) : null;
+			case 2:
+				return selectedFormat ? (
+					<CourtsStep
+						control={control}
+						maxCourts={maxCourts}
+						currentCourtCount={getValues('courtCount') || 1}
+					/>
+				) : null;
+			case 3:
+				return <MatchFormatStep control={control} />;
+			default:
+				return null;
+		}
+	};
+
+	return (
+		<KeyboardAvoidingView style={{ flex: 1, padding: 16 }}>
+			{/* Header with progress */}
+			<View style={{ marginBottom: 24 }}>
+				<Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 8 }}>
+					Skapa turnering
+				</Text>
+				<Text style={{ fontSize: 16, color: '#666', marginBottom: 16 }}>
+					Steg {currentStep + 1} av {steps.length}: {steps[currentStep]}
+				</Text>
+
+				{/* Progress bar */}
+				<View
+					style={{
+						height: 4,
+						backgroundColor: '#e0e0e0',
+						borderRadius: 2,
+						marginBottom: 16,
+					}}>
+					<View
+						style={{
+							height: '100%',
+							backgroundColor: '#ff5845',
+							width: `${((currentStep + 1) / steps.length) * 100}%`,
+							borderRadius: 2,
+						}}
+					/>
+				</View>
+			</View>
+
+			{/* Step content */}
+			<View style={{ flex: 1 }}>{renderStep()}</View>
+
+			{/* Navigation buttons */}
+			<View
+				style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					marginTop: 24,
+					gap: 12,
+				}}>
+				<View style={{ flex: 1 }}>
+					{currentStep > 0 ? (
+						<Button
+							variant='neutral'
+							title='Back'
+							onPress={handlePrevious}
+						/>
+					) : (
+						<Button
+							variant='negative'
+							title='Cancel'
+							onPress={onCancel}
+						/>
+					)}
+				</View>
+
+				<View style={{ flex: 1 }}>
+					{currentStep < steps.length - 1 ? (
+						<Button
+							variant='positive'
+							title='Next'
+							onPress={handleNext}
+							disabled={!canProceedToNext()}
+						/>
+					) : (
+						<Button
+							variant='positive'
+							title='Create Tournament'
+							onPress={handleSubmit(handleFormSubmit)}
+							disabled={!canProceedToNext()}
+						/>
+					)}
+				</View>
+			</View>
+		</KeyboardAvoidingView>
+	);
+};
+
+export default CreateTournamentWizard;

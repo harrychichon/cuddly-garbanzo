@@ -54,6 +54,7 @@ const FormatCardList = ({ onPress }: Readonly<FormatCardListProps>) => {
 			contentContainerStyle={styles.container}
 			ListEmptyComponent={renderEmpty}
 			showsVerticalScrollIndicator={false}
+			scrollEnabled={false}
 		/>
 	);
 };

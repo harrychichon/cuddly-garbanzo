@@ -1,6 +1,6 @@
 export const TOURNAMENT_STATUS = {
-	DRAFT: 'draft',
-	IN_PROGRESS: 'in_progress',
+	SETUP: 'setup',
+	ACTIVE: 'active',
 	COMPLETED: 'completed',
 	CANCELLED: 'cancelled',
 };

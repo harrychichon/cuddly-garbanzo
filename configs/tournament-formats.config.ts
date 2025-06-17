@@ -17,6 +17,10 @@ export type TournamentFormat = {
 	  }
 );
 
+export const calculateMaxCourts = (participantCount: number): number => {
+	return Math.floor(participantCount / 2);
+};
+
 export const getAvailableFormats = () =>
 	Object.entries(TOURNAMENT_FORMATS)
 		.filter(([_, format]) => format.available)

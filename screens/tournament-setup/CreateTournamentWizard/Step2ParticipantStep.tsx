@@ -1,0 +1,98 @@
+import InputSlider from '@/components/InputSlider';
+import InputText from '@/components/InputText';
+import { TournamentFormat } from '@/configs';
+import React, { useEffect, useState } from 'react';
+import { Control, Controller, useWatch } from 'react-hook-form';
+import { ScrollView, Text, View } from 'react-native';
+import { TournamentFormData } from '../types';
+
+type ParticipantsStepProps = {
+	control: Control<TournamentFormData>;
+	format: TournamentFormat;
+	participantCount: number;
+};
+
+export const ParticipantsStep = ({
+	control,
+	format,
+	participantCount,
+}: Readonly<ParticipantsStepProps>) => {
+	const [participantNames, setParticipantNames] = useState<string[]>([]);
+
+	const isSingles = format.type === 'singles';
+	const participantLabel = isSingles ? 'Player' : 'Team';
+	const participantLabelPlural = isSingles ? 'Players' : 'Teams';
+
+	const range = isSingles ? format.playerRange : format.teamRange;
+
+	const watchedCount = useWatch({
+		control,
+		name: isSingles ? 'playerCount' : 'teamCount',
+		defaultValue: participantCount,
+	});
+
+	// Update participant names array when count changes
+	useEffect(() => {
+		const currentCount = watchedCount || participantCount;
+		const newNames = Array.from({ length: currentCount }, (_, index) => {
+			return participantNames[index] || `${participantLabel} ${index + 1}`;
+		});
+		setParticipantNames(newNames);
+	}, [watchedCount, participantCount, participantLabel]);
+
+	const handleNameChange = (index: number, name: string) => {
+		const updatedNames = [...participantNames];
+		updatedNames[index] = name;
+		setParticipantNames(updatedNames);
+	};
+
+	return (
+		<ScrollView showsVerticalScrollIndicator={false}>
+			<View style={{ gap: 24 }}>
+				{/* Participant Count Slider */}
+				<View>
+					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
+						Antal {participantLabelPlural}
+					</Text>
+					<Controller
+						name={isSingles ? 'playerCount' : 'teamCount'}
+						control={control}
+						render={({ field: { onChange, value } }) => (
+							<InputSlider
+								label={`Number of ${participantLabelPlural}`}
+								minimumValue={range.min}
+								maximumValue={range.max}
+								step={range.step}
+								value={value || range.min}
+								onValueChange={onChange}
+								units={participantLabelPlural.toLowerCase()}
+							/>
+						)}
+					/>
+				</View>
+
+				{/* Participant Name Inputs */}
+				<View>
+					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
+						{participantLabel} Names
+					</Text>
+					<Text style={{ fontSize: 14, color: '#666', marginBottom: 16 }}>
+						Customize the names or leave as default
+					</Text>
+
+					<View style={{ gap: 12 }}>
+						{participantNames.map((name, index) => (
+							<InputText
+								key={index + name}
+								label={`${participantLabel} ${index + 1}`}
+								value={name}
+								onChangeText={(text) => handleNameChange(index, text)}
+								maxLength={30}
+							/>
+						))}
+					</View>
+				</View>
+			</View>
+		</ScrollView>
+	);
+};

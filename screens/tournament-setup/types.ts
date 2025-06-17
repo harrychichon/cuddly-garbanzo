@@ -1,23 +1,29 @@
 import { MATCH_FORMATS, SCORING, TOURNAMENT_FORMATS } from '@/configs';
-import {} from '@/constants';
 
 export type TournamentFormData = {
 	tournamentName: string;
 	matchFormat: keyof typeof MATCH_FORMATS;
-	scoringSystem: keyof typeof SCORING;
+	scoringSystem?: keyof typeof SCORING;
 	formatType: keyof typeof TOURNAMENT_FORMATS;
-	courtCount?: number;
-} & ({ playerCount: number } | { teamCount: number });
+	courtCount: number;
+	courtNames?: string[];
+} & (
+	| { playerCount: number; playerNames?: string[] }
+	| { teamCount: number; teamNames?: string[] }
+);
 
 export const isSinglesFormat = (
 	data: TournamentFormData
-): data is TournamentFormData & { playerCount: number } => {
+): data is TournamentFormData & {
+	playerCount: number;
+	playerNames?: string[];
+} => {
 	return 'playerCount' in data;
 };
 
 export const isDoublesFormat = (
 	data: TournamentFormData
-): data is TournamentFormData & { teamCount: number } => {
+): data is TournamentFormData & { teamCount: number; teamNames?: string[] } => {
 	return 'teamCount' in data;
 };
 
