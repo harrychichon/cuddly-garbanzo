@@ -1,6 +1,5 @@
 import Button from '@/components/Button';
 import { calculateMaxCourts, TournamentFormat } from '@/configs';
-
 import { useTournamentStore } from '@/stores/tournamentStore';
 import { useRouter } from 'expo-router';
 import React, { useMemo, useState } from 'react';
@@ -50,7 +49,7 @@ const CreateTournamentWizard = ({
 			},
 		});
 
-	// Watch participant count for dynamic court calculation
+	// Håller koll på antal deltagare för dynamisk beräkning av antal banor
 	const participantCountFieldName =
 		selectedFormat?.type === 'singles' ? 'playerCount' : 'teamCount';
 	const participantCount = useWatch({
@@ -62,7 +61,7 @@ const CreateTournamentWizard = ({
 				: selectedFormat?.teamRange?.min || 2,
 	});
 
-	// Calculate max courts based on participant count
+	// Dynamisk beräkning av antal banor baserat på antal deltagare
 	const maxCourts = useMemo(() => {
 		if (!participantCount) return 1;
 		return calculateMaxCourts(participantCount as number);
@@ -91,14 +90,14 @@ const CreateTournamentWizard = ({
 			format.name as keyof typeof import('@/configs').TOURNAMENT_FORMATS
 		);
 
-		// Set default participant count
+		// Bestämmer default för antal spelare
 		if (format.type === 'singles') {
 			setValue('playerCount', format.playerRange.min);
 		} else {
 			setValue('teamCount', format.teamRange.min);
 		}
 
-		// Reset court count when format changes
+		// Bestämmer default för antal banor
 		setValue('courtCount', 1);
 	};
 
@@ -176,7 +175,6 @@ const CreateTournamentWizard = ({
 
 	return (
 		<KeyboardAvoidingView style={{ flex: 1, padding: 16 }}>
-			{/* Header with progress */}
 			<View style={{ marginBottom: 24 }}>
 				<Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 8 }}>
 					Skapa turnering

@@ -1,4 +1,6 @@
+import 'react-native-get-random-values';
 import { Match } from '@/types/types';
+import { nanoid } from 'nanoid';
 
 export function generateRoundRobinMatches(
 	playersOrTeams: string[],
@@ -8,6 +10,7 @@ export function generateRoundRobinMatches(
 	const totalPlayers = playersOrTeams.length;
 	const even = totalPlayers % 2 === 0;
 	const players = [...playersOrTeams];
+	const id = nanoid();
 
 	if (!even) players.push('BYE'); // make even if odd count
 
@@ -23,16 +26,17 @@ export function generateRoundRobinMatches(
 			if (home === 'BYE' || away === 'BYE') continue;
 
 			roundMatches.push({
+				id: id,
 				court: courts[match % courts.length],
-				teamA: [home],
-				teamB: [away],
+				sideA: [home],
+				sideB: [away],
 				round: round + 1,
 				scoreA: null,
 				scoreB: null,
 			});
 		}
 
-		// rotate players (except first)
+		// Rotera spelare (förutom den första)
 		players.splice(1, 0, players.pop()!);
 		rounds.push(roundMatches);
 	}

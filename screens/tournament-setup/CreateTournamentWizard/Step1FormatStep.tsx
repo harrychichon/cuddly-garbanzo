@@ -1,4 +1,3 @@
-// steps/FormatStep.tsx
 import InputText from '@/components/InputText';
 import { getTournamentFormat, TournamentFormat } from '@/configs';
 import React from 'react';
@@ -21,7 +20,6 @@ export const FormatStep = ({
 	return (
 		<ScrollView showsVerticalScrollIndicator={false}>
 			<View style={{ gap: 24 }}>
-				{/* Tournament Name Input */}
 				<View>
 					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
 						Turneringens namn:
@@ -40,7 +38,6 @@ export const FormatStep = ({
 					/>
 				</View>
 
-				{/* Format Selection */}
 				<View>
 					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
 						Välj tävlingsformat:
@@ -65,7 +62,6 @@ export const FormatStep = ({
 					)}
 					<FormatCardList
 						onPress={(formatId) => {
-							// You'll need to get the format by ID from your config
 							const format = getTournamentFormat(formatId);
 							if (format) {
 								onFormatSelect(format);

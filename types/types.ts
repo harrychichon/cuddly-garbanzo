@@ -1,19 +1,54 @@
 import { TournamentFormData } from '@/screens/tournament-setup';
-
+/* 
 export type Player = {
 	name: string;
 	id: string;
 };
 
 export type Team = {
-	members: Player[];
+	name: string;
+	id: string;
+};
+
+export type PairOfPlayers = [Player, Player];
+
+export type Side = PairOfPlayers | Team;
+
+export function isPairOfPlayers(side: Side): side is [Player, Player] {
+	return Array.isArray(side) && side.length === 2;
+}
+
+export type Court = {
+	name: string;
 	id: string;
 };
 
 export type Match = {
+	id: string;
+	court: Court;
+	sideA: Side;
+	sideB: Side;
+	round: number;
+	scoreA: number | null;
+	scoreB: number | null;
+};
+
+export type Tournament = {
+	id: string;
+	name: string;
+	format: TournamentFormData['formatType'];
+	createdAt: string;
+	status: 'active' | 'completed';
+	rounds: Match[][];
+	settings: TournamentFormData;
+};
+ */
+
+export type Match = {
+	id: string;
 	court: string;
-	teamA: string[];
-	teamB: string[];
+	sideA: string | string[];
+	sideB: string | string[];
 	round: number;
 	scoreA: number | null;
 	scoreB: number | null;

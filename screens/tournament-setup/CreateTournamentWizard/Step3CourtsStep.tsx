@@ -24,7 +24,7 @@ export const CourtsStep = ({
 		defaultValue: currentCourtCount,
 	});
 
-	// Update court names array when count changes
+	// Updpaterar bannamnens array när antal ändras
 	useEffect(() => {
 		const currentCount = watchedCourtCount || currentCourtCount;
 		const newNames = Array.from({ length: currentCount }, (_, index) => {
@@ -42,7 +42,6 @@ export const CourtsStep = ({
 	return (
 		<ScrollView showsVerticalScrollIndicator={false}>
 			<View style={{ gap: 24 }}>
-				{/* Court Count Slider */}
 				<View>
 					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
 						Number of Courts
@@ -67,7 +66,6 @@ export const CourtsStep = ({
 					/>
 				</View>
 
-				{/* Court Name Inputs */}
 				<View>
 					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
 						Court Names

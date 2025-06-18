@@ -1,9 +1,9 @@
 import 'react-native-get-random-values';
 import { TournamentFormData } from '@/screens/tournament-setup';
 import { Tournament } from '@/types/types';
-import { generateRoundRobinMatches } from '@/utils/scheduler';
 import { nanoid } from 'nanoid';
 import { create } from 'zustand';
+import { generateRoundRobinMatches } from '@/utils/generateRoundRobinMatches';
 
 type TournamentState = {
 	activeTournaments: Tournament[];

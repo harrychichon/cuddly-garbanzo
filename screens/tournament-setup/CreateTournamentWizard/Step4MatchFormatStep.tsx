@@ -29,7 +29,6 @@ export const MatchFormatStep = ({
 	return (
 		<ScrollView showsVerticalScrollIndicator={false}>
 			<View style={{ gap: 24 }}>
-				{/* Match Format Selection */}
 				<View>
 					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
 						Match Format
@@ -44,7 +43,6 @@ export const MatchFormatStep = ({
 					/>
 				</View>
 
-				{/* Match Format Explanations */}
 				<View
 					style={{
 						padding: 16,

@@ -19,7 +19,7 @@ type FormatCardProps = {
 	formatId: string;
 };
 
-//TODO Extract to a separate file
+//TODO Abstrahera till egen fil
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 const cardWidth = (screenWidth - sizes.base.spacing * 3) / 2;

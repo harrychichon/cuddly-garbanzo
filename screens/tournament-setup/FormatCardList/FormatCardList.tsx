@@ -40,9 +40,7 @@ const FormatCardList = ({ onPress }: Readonly<FormatCardListProps>) => {
 	);
 
 	const renderEmpty = () => (
-		<Text style={styles.emptyText}>
-			No active tournament formats available.
-		</Text>
+		<Text style={styles.emptyText}>Inga aktiva spelformer tillgängliga.</Text>
 	);
 
 	return (

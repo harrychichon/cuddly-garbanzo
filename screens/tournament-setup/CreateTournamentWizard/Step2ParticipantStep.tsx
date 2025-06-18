@@ -31,7 +31,7 @@ export const ParticipantsStep = ({
 		defaultValue: participantCount,
 	});
 
-	// Update participant names array when count changes
+	// Uppdaterar deltagarnamnens array när antal ändras
 	useEffect(() => {
 		const currentCount = watchedCount || participantCount;
 		const newNames = Array.from({ length: currentCount }, (_, index) => {
@@ -49,7 +49,6 @@ export const ParticipantsStep = ({
 	return (
 		<ScrollView showsVerticalScrollIndicator={false}>
 			<View style={{ gap: 24 }}>
-				{/* Participant Count Slider */}
 				<View>
 					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
 						Antal {participantLabelPlural}
@@ -71,7 +70,6 @@ export const ParticipantsStep = ({
 					/>
 				</View>
 
-				{/* Participant Name Inputs */}
 				<View>
 					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
 						{participantLabel} Names
