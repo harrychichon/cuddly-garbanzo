@@ -5,7 +5,7 @@ type CourtCardProps = {
 	match: Match;
 };
 
-const CourtCart = ({ match }: Readonly<CourtCardProps>) => {
+const CourtCard = ({ match }: Readonly<CourtCardProps>) => {
 	return (
 		<View>
 			<Text>{match.court}</Text>
@@ -20,4 +20,4 @@ const CourtCart = ({ match }: Readonly<CourtCardProps>) => {
 	);
 };
 
-export default CourtCart;
+export default CourtCard;
