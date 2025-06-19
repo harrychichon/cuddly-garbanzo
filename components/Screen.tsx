@@ -1,7 +1,7 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { sizes } from '@/design-tokens';
 import { ReactNode } from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type ScreenProps = {
 	type: 'ScrollView' | 'SafeAreaView';
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignSelf: 'stretch',
 		alignItems: 'center',
+		justifyContent: 'flex-end',
 	},
 });
 

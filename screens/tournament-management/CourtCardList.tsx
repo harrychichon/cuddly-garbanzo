@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
-import { Match } from '@/types/types';
-import CourtCard from './CourtCard';
 import Button from '@/components/Button';
+import { Match } from '@/types/types';
+import { useState } from 'react';
+import { ScrollView, StyleSheet } from 'react-native';
+import CourtCard from './CourtCard';
 
 type DraftScore = {
 	scoreA: number | null;

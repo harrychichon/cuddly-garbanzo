@@ -1,5 +1,6 @@
 import Button from '@/components/Button';
 import { calculateMaxCourts, TournamentFormat } from '@/configs';
+import { useAppTheme } from '@/hooks';
 import { useTournamentStore } from '@/stores/tournamentStore';
 import { useRouter } from 'expo-router';
 import React, { useMemo, useState } from 'react';
@@ -22,6 +23,7 @@ const CreateTournamentWizard = ({
 	onSubmit,
 	onCancel,
 }: Readonly<CreateTournamentWizardProps>) => {
+	const { theme } = useAppTheme();
 	const { createTournament } = useTournamentStore.getState();
 	const [currentStep, setCurrentStep] = useState(0);
 	const [selectedFormat, setSelectedFormat] = useState<TournamentFormat | null>(
@@ -79,6 +81,12 @@ const CreateTournamentWizard = ({
 		if (currentStep > 0) {
 			setCurrentStep(currentStep - 1);
 		}
+	};
+
+	const handleCancel = () => {
+		router.push({
+			pathname: '/',
+		});
 	};
 
 	const handleFormatSelect = (format: TournamentFormat) => {
@@ -176,10 +184,17 @@ const CreateTournamentWizard = ({
 	return (
 		<KeyboardAvoidingView style={{ flex: 1, padding: 16, width: '100%' }}>
 			<View style={{ marginBottom: 24 }}>
-				<Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 8 }}>
+				<Text
+					style={{
+						color: theme.colors.text,
+						fontSize: 24,
+						fontWeight: 'bold',
+						marginBottom: 8,
+					}}>
 					Skapa turnering
 				</Text>
-				<Text style={{ fontSize: 16, color: '#666', marginBottom: 16 }}>
+				<Text
+					style={{ fontSize: 16, color: theme.colors.text, marginBottom: 16 }}>
 					Steg {currentStep + 1} av {steps.length}: {steps[currentStep]}
 				</Text>
 
@@ -187,14 +202,14 @@ const CreateTournamentWizard = ({
 				<View
 					style={{
 						height: 4,
-						backgroundColor: '#e0e0e0',
+						backgroundColor: theme.colors.surfaceElevated,
 						borderRadius: 2,
 						marginBottom: 16,
 					}}>
 					<View
 						style={{
 							height: '100%',
-							backgroundColor: '#ff5845',
+							backgroundColor: theme.colors.cta,
 							width: `${((currentStep + 1) / steps.length) * 100}%`,
 							borderRadius: 2,
 						}}
@@ -216,15 +231,15 @@ const CreateTournamentWizard = ({
 				<View style={{ flex: 1 }}>
 					{currentStep > 0 ? (
 						<Button
-							variant='neutral'
-							title='Back'
+							variant='negative'
+							title='Bakåt'
 							onPress={handlePrevious}
 						/>
 					) : (
 						<Button
 							variant='negative'
-							title='Cancel'
-							onPress={onCancel}
+							title='Avbryt'
+							onPress={handleCancel}
 						/>
 					)}
 				</View>
@@ -233,14 +248,14 @@ const CreateTournamentWizard = ({
 					{currentStep < steps.length - 1 ? (
 						<Button
 							variant='positive'
-							title='Next'
+							title='Nästa'
 							onPress={handleNext}
 							disabled={!canProceedToNext()}
 						/>
 					) : (
 						<Button
 							variant='positive'
-							title='Create Tournament'
+							title='Skapa turnering'
 							onPress={handleSubmit(handleFormSubmit)}
 							disabled={!canProceedToNext()}
 						/>

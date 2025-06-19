@@ -1,6 +1,7 @@
 import InputSlider from '@/components/InputSlider';
 import InputText from '@/components/InputText';
 import { TournamentFormat } from '@/configs';
+import { useAppTheme } from '@/hooks';
 import React, { useEffect, useState } from 'react';
 import { Control, Controller, useWatch } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
@@ -17,6 +18,7 @@ export const ParticipantsStep = ({
 	format,
 	participantCount,
 }: Readonly<ParticipantsStepProps>) => {
+	const { theme } = useAppTheme();
 	const [participantNames, setParticipantNames] = useState<string[]>([]);
 
 	const isSingles = format.type === 'singles';
@@ -50,7 +52,13 @@ export const ParticipantsStep = ({
 		<ScrollView showsVerticalScrollIndicator={false}>
 			<View style={{ gap: 24 }}>
 				<View>
-					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
+					<Text
+						style={{
+							color: theme.colors.text,
+							fontSize: 18,
+							fontWeight: '600',
+							marginBottom: 12,
+						}}>
 						Antal {participantLabelPlural}
 					</Text>
 					<Controller
@@ -71,11 +79,17 @@ export const ParticipantsStep = ({
 				</View>
 
 				<View>
-					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
+					<Text
+						style={{
+							color: theme.colors.text,
+							fontSize: 18,
+							fontWeight: '600',
+							marginBottom: 12,
+						}}>
 						{participantLabel} Names
 					</Text>
 					<Text style={{ fontSize: 14, color: '#666', marginBottom: 16 }}>
-						Customize the names or leave as default
+						Specificera namnen eller lämna de förifyllda.
 					</Text>
 
 					<View style={{ gap: 12 }}>

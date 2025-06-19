@@ -1,5 +1,6 @@
 import InputSlider from '@/components/InputSlider';
 import InputText from '@/components/InputText';
+import { useAppTheme } from '@/hooks';
 import React, { useEffect, useState } from 'react';
 import { Control, Controller, useWatch } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
@@ -16,6 +17,7 @@ export const CourtsStep = ({
 	maxCourts,
 	currentCourtCount,
 }: Readonly<CourtsStepProps>) => {
+	const { theme } = useAppTheme();
 	const [courtNames, setCourtNames] = useState<string[]>([]);
 
 	const watchedCourtCount = useWatch({
@@ -43,10 +45,21 @@ export const CourtsStep = ({
 		<ScrollView showsVerticalScrollIndicator={false}>
 			<View style={{ gap: 24 }}>
 				<View>
-					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
+					<Text
+						style={{
+							color: theme.colors.text,
+							fontSize: 18,
+							fontWeight: '600',
+							marginBottom: 12,
+						}}>
 						Number of Courts
 					</Text>
-					<Text style={{ fontSize: 14, color: '#666', marginBottom: 16 }}>
+					<Text
+						style={{
+							fontSize: 14,
+							color: theme.colors.text,
+							marginBottom: 16,
+						}}>
 						Maximum courts available: {maxCourts} (based on participant count)
 					</Text>
 					<Controller
@@ -67,11 +80,22 @@ export const CourtsStep = ({
 				</View>
 
 				<View>
-					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
+					<Text
+						style={{
+							color: theme.colors.text,
+							fontSize: 18,
+							fontWeight: '600',
+							marginBottom: 12,
+						}}>
 						Court Names
 					</Text>
-					<Text style={{ fontSize: 14, color: '#666', marginBottom: 16 }}>
-						Customize the court names or leave as default
+					<Text
+						style={{
+							fontSize: 14,
+							color: theme.colors.text,
+							marginBottom: 16,
+						}}>
+						Specificera namnen på banorna eller lämna de förifyllda.
 					</Text>
 
 					<View style={{ gap: 12 }}>

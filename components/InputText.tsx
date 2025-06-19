@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 type TextInputProps = {
-	label: string;
+	label?: string;
 	value: string;
 	onChangeText: (text: string) => void;
 	maxLength?: number;
@@ -25,6 +25,8 @@ const InputText = ({
 				container: { width: '100%', gap: theme.sizes.spacing.sm },
 				label: {
 					color: theme.colors.text,
+					fontSize: 18,
+					fontWeight: '600',
 				},
 				input: {
 					width: '100%',

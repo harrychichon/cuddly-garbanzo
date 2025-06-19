@@ -1,6 +1,7 @@
-import { TouchableOpacity, StyleSheet } from 'react-native';
 import { Text } from '@/components/Themed';
+import { useAppTheme } from '@/hooks';
 import isSelected from '@/utils/isSelected';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 type RoundButtonProps = {
 	title: string;
@@ -15,10 +16,34 @@ const RoundButton = ({
 	onPress,
 	selectedRoundIndex,
 }: Readonly<RoundButtonProps>) => {
+	const { theme } = useAppTheme();
 	const selected = isSelected(
 		selectedRoundIndex.toString(),
 		roundIndex.toString()
 	);
+
+	const styles = StyleSheet.create({
+		button: {
+			backgroundColor: theme.colors.secondary,
+			padding: 12,
+			borderRadius: 8,
+			minWidth: 60,
+			alignItems: 'center',
+			justifyContent: 'center',
+		},
+		selectedButton: {
+			backgroundColor: theme.colors.cta,
+		},
+		text: {
+			fontSize: 16,
+			fontWeight: '500',
+			color: '#000',
+		},
+		selectedText: {
+			color: '#fff',
+			fontWeight: theme.typography.fontWeight.extrabold,
+		},
+	});
 
 	return (
 		<TouchableOpacity
@@ -30,27 +55,5 @@ const RoundButton = ({
 		</TouchableOpacity>
 	);
 };
-
-const styles = StyleSheet.create({
-	button: {
-		backgroundColor: '#e0e0e0',
-		padding: 12,
-		borderRadius: 8,
-		minWidth: 60,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	selectedButton: {
-		backgroundColor: '#007AFF',
-	},
-	text: {
-		fontSize: 16,
-		fontWeight: '500',
-		color: '#000',
-	},
-	selectedText: {
-		color: '#fff',
-	},
-});
 
 export default RoundButton;

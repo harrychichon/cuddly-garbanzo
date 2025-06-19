@@ -1,6 +1,5 @@
-// steps/MatchFormatStep.tsx
 import { MATCH_FORMATS } from '@/configs';
-import React, { useState } from 'react';
+import { useAppTheme } from '@/hooks';
 import { Control, useWatch } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
 import { FormFieldRenderer } from '../helpers/formFieldRenderer';
@@ -13,6 +12,8 @@ type MatchFormatStepProps = {
 export const MatchFormatStep = ({
 	control,
 }: Readonly<MatchFormatStepProps>) => {
+	const { theme } = useAppTheme();
+
 	// Övervaka vald matchformattyp för att visa relevanta alternativ
 	const selectedFormatType = useWatch({
 		control,
@@ -85,10 +86,21 @@ export const MatchFormatStep = ({
 		<ScrollView showsVerticalScrollIndicator={false}>
 			<View style={{ gap: 24 }}>
 				<View>
-					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
+					<Text
+						style={{
+							color: theme.colors.text,
+							fontSize: 18,
+							fontWeight: '600',
+							marginBottom: 12,
+						}}>
 						Match Format
 					</Text>
-					<Text style={{ fontSize: 14, color: '#666', marginBottom: 16 }}>
+					<Text
+						style={{
+							fontSize: 14,
+							color: theme.colors.text,
+							marginBottom: 16,
+						}}>
 						Configure your match format settings
 					</Text>
 

@@ -37,7 +37,7 @@ const InputSlider = ({
 	);
 	return (
 		<View style={styles.container}>
-			<Text style={{ marginBottom: 10 }}>
+			<Text style={{ marginBottom: 10, color: theme.colors.text }}>
 				{label}: {value || minimumValue} {units}
 			</Text>
 

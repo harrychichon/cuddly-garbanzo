@@ -1,5 +1,6 @@
 import InputSlider from '@/components/InputSlider';
 import InputText from '@/components/InputText';
+import { useAppTheme } from '@/hooks';
 import { Control, Controller } from 'react-hook-form';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { FormField, TournamentFormData } from '../types';
@@ -13,6 +14,7 @@ export const FormFieldRenderer = ({
 	field,
 	control,
 }: Readonly<FormFieldRendererProps>) => {
+	const { theme } = useAppTheme();
 	const key = field.name;
 
 	switch (field.type) {
@@ -37,7 +39,7 @@ export const FormFieldRenderer = ({
 		case 'select':
 			return (
 				<View key={key}>
-					<Text>{field.label}:</Text>
+					<Text style={{ color: theme.colors.text }}>{field.label}:</Text>
 					{field.options.map((option) => (
 						<Controller
 							key={`${key}-${option.value}`}

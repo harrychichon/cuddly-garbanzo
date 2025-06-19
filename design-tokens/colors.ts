@@ -35,11 +35,11 @@
 // 	},
 // };
 
-// colors.ts
 const darkBlue = '#1e3a5f';
 const deepBlue = '#0f1419';
 const brightGreen = '#7ed321';
 const accentGreen = '#5cb85c';
+const accentOrange = '#f25442';
 const white = '#ffffff';
 const black = '#000000';
 const lightGray = '#f8f9fa';
@@ -65,6 +65,7 @@ export default {
 		black: black,
 		border: '#e9ecef',
 		accent: darkBlue,
+		cta: accentOrange,
 	},
 	dark: {
 		primary: brightGreen,
@@ -81,5 +82,6 @@ export default {
 		black: black,
 		border: '#3a5a7a',
 		accent: brightGreen,
+		cta: accentOrange,
 	},
 };

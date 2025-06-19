@@ -1,5 +1,6 @@
 import InputText from '@/components/InputText';
 import { getTournamentFormat, TournamentFormat } from '@/configs';
+import { useAppTheme } from '@/hooks';
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
@@ -17,6 +18,7 @@ export const FormatStep = ({
 	selectedFormat,
 	onFormatSelect,
 }: Readonly<FormatStepProps>) => {
+	const { theme } = useAppTheme();
 	return (
 		//TODO Flytta ut turneringens namn från scrollview
 		//TODO lägg border på scrollview
@@ -25,23 +27,29 @@ export const FormatStep = ({
 			showsVerticalScrollIndicator={false}>
 			<View style={{ gap: 24 }}>
 				<View>
-					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
+					<Text
+						style={{
+							color: theme.colors.text,
+							fontSize: 18,
+							fontWeight: '600',
+							marginBottom: 12,
+						}}>
 						Välj tävlingsformat:
 					</Text>
 					{selectedFormat && (
 						<View
 							style={{
 								padding: 12,
-								backgroundColor: '#f0f9ff',
+								backgroundColor: '#6fdc6f',
 								borderRadius: 8,
 								marginBottom: 16,
 								borderWidth: 2,
-								borderColor: '#0ea5e9',
+								borderColor: '#1b371b',
 							}}>
-							<Text style={{ fontWeight: '600', color: '#0369a1' }}>
+							<Text style={{ fontWeight: '600', color: '#1b371b' }}>
 								Vald: {selectedFormat.name}
 							</Text>
-							<Text style={{ color: '#0369a1', marginTop: 4 }}>
+							<Text style={{ color: '#1b371b', marginTop: 4 }}>
 								{selectedFormat.summary}
 							</Text>
 						</View>
@@ -56,15 +64,12 @@ export const FormatStep = ({
 					/>
 				</View>
 				<View>
-					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
-						Turneringens namn:
-					</Text>
 					<Controller
 						name='name'
 						control={control}
 						render={({ field: { onChange, value } }) => (
 							<InputText
-								label='Tournament Name'
+								label='Turneringens namn:'
 								value={value || ''}
 								onChangeText={onChange}
 								maxLength={50}
