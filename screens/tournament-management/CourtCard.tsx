@@ -25,7 +25,7 @@ const CourtCard = ({
 	hasUnsavedScore,
 	draftScore,
 }: CourtCardProps) => {
-	// Use draft score if available, otherwise use match scores
+	// Använd preliminärt resultat om tillgängligt, annars använd matchresultat.
 	const [scoreA, setScoreA] = useState<string>(
 		draftScore?.scoreA?.toString() ?? match.scoreA?.toString() ?? ''
 	);
@@ -33,7 +33,7 @@ const CourtCard = ({
 		draftScore?.scoreB?.toString() ?? match.scoreB?.toString() ?? ''
 	);
 
-	// Update local state when draft score changes (e.g., after saving)
+	// Uppdatera lokal state när det preliminära resultatet ändras (t.ex. efter att det sparats).
 	useEffect(() => {
 		if (draftScore) {
 			setScoreA(draftScore.scoreA?.toString() ?? '');

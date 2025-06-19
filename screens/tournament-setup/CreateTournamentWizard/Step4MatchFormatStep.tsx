@@ -13,7 +13,7 @@ type MatchFormatStepProps = {
 export const MatchFormatStep = ({
 	control,
 }: Readonly<MatchFormatStepProps>) => {
-	// Watch the selected match format type to show relevant options
+	// Övervaka vald matchformattyp för att visa relevanta alternativ
 	const selectedFormatType = useWatch({
 		control,
 		name: 'matchFormat',
@@ -30,7 +30,7 @@ export const MatchFormatStep = ({
 		],
 	};
 
-	// Generate games per set options based on selected format type
+	// Generera alternativ för antal game per set baserat på valt formattyp
 	const getGamesPerSetOptions = (formatType: string) => {
 		const format = MATCH_FORMATS[formatType as keyof typeof MATCH_FORMATS];
 		if (!format) return [];
@@ -42,7 +42,7 @@ export const MatchFormatStep = ({
 		return options;
 	};
 
-	// Generate sets options for sets-based format
+	// Generera alternativ för antal set för set-baserat format
 	const getSetsOptions = () => {
 		const format = MATCH_FORMATS.SETS_BASED;
 		const options = [];
@@ -92,7 +92,7 @@ export const MatchFormatStep = ({
 						Configure your match format settings
 					</Text>
 
-					{/* Match Format Type Selection */}
+					{/* Val av matchformattyp */}
 					<View style={{ marginBottom: 20 }}>
 						<FormFieldRenderer
 							field={matchFormatTypeField}
@@ -100,7 +100,7 @@ export const MatchFormatStep = ({
 						/>
 					</View>
 
-					{/* Conditional fields based on selected format type */}
+					{/* Villkorliga fält baserat på vald formattyp */}
 					{selectedFormatType && (
 						<>
 							{/* Sets selection - only for SETS_BASED */}
@@ -113,7 +113,7 @@ export const MatchFormatStep = ({
 								</View>
 							)}
 
-							{/* Games per set selection */}
+							{/* Val av antal game per set */}
 							<View style={{ marginBottom: 20 }}>
 								<FormFieldRenderer
 									field={gamesPerSetField}
@@ -121,7 +121,7 @@ export const MatchFormatStep = ({
 								/>
 							</View>
 
-							{/* Tiebreak rule selection */}
+							{/* Val av tiebreak-regel */}
 							<View style={{ marginBottom: 20 }}>
 								<FormFieldRenderer
 									field={tiebreakField}
@@ -132,7 +132,7 @@ export const MatchFormatStep = ({
 					)}
 				</View>
 
-				{/* Format Explanations */}
+				{/* Formatförklaringar */}
 				<View
 					style={{
 						padding: 16,

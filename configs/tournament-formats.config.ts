@@ -36,12 +36,6 @@ export const getTournamentFormat = (id: string): TournamentFormat | null => {
 	return format;
 };
 
-// export const MATCH_FORMATS = {
-// 	BEST_OF_ONE: { sets: 1, gamesPerSet: 6, tiebreakAt: 6 },
-// 	BEST_OF_THREE: { sets: 3, gamesPerSet: 6, tiebreakAt: 6 },
-// 	SHORT_SET: { sets: 1, gamesPerSet: 4, tiebreakAt: 4 },
-// };
-
 export const MATCH_FORMATS = {
 	POINTS_BASED: {
 		sets: 1,

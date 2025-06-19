@@ -32,7 +32,7 @@ const CourtCardList = ({ matches, onRoundScoresSave }: CourtCardListProps) => {
 
 	const handleSaveAllScores = () => {
 		onRoundScoresSave(draftScores);
-		setDraftScores({}); // Clear drafts after saving
+		setDraftScores({}); // Rensa drafts efter sparats
 	};
 
 	const hasUnsavedScores = Object.keys(draftScores).length > 0;

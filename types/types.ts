@@ -79,5 +79,5 @@ export type Tournament = {
 	status: 'active' | 'completed';
 	rounds: Match[][];
 	winner?: string; // Winner name
-	// tournamentTable?: TournamentTableEntry[]; // You'd need to define this type
+	// tournamentTable?: TournamentTableEntry[];
 };
