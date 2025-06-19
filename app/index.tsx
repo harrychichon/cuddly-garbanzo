@@ -5,17 +5,27 @@ import Screen from '../components/Screen';
 
 export default function Home() {
 	const router = useRouter();
-	const handlePress = () => {
+	const handlePressCreate = () => {
 		router.push({
 			pathname: '/tournament-setup',
+		});
+	};
+	const handlePressMyTournaments = () => {
+		router.push({
+			pathname: '/tournament-results',
 		});
 	};
 
 	return (
 		<Screen type={'SafeAreaView'}>
 			<Button
-				onPress={handlePress}
+				onPress={handlePressCreate}
 				title='Skapa turnering'
+				variant='positive'
+			/>
+			<Button
+				onPress={handlePressMyTournaments}
+				title='Mina turneringar'
 				variant='positive'
 			/>
 		</Screen>

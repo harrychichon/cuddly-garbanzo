@@ -2,17 +2,17 @@ import { ScrollView } from 'react-native';
 import { Match } from '@/types/types';
 import RoundButton from './RoundButton';
 
-type RoundListProps = {
+type RoundButtonListProps = {
 	rounds: Match[][];
 	onRoundSelect: (roundIndex: number) => void;
 	selectedRoundIndex: number;
 };
 
-const RoundList = ({
+const RoundButtonList = ({
 	rounds,
 	onRoundSelect,
 	selectedRoundIndex,
-}: Readonly<RoundListProps>) => {
+}: Readonly<RoundButtonListProps>) => {
 	return (
 		<ScrollView
 			horizontal={true}
@@ -35,4 +35,4 @@ const RoundList = ({
 	);
 };
 
-export default RoundList;
+export default RoundButtonList;

@@ -36,10 +36,29 @@ export const getTournamentFormat = (id: string): TournamentFormat | null => {
 	return format;
 };
 
+// export const MATCH_FORMATS = {
+// 	BEST_OF_ONE: { sets: 1, gamesPerSet: 6, tiebreakAt: 6 },
+// 	BEST_OF_THREE: { sets: 3, gamesPerSet: 6, tiebreakAt: 6 },
+// 	SHORT_SET: { sets: 1, gamesPerSet: 4, tiebreakAt: 4 },
+// };
+
 export const MATCH_FORMATS = {
-	BEST_OF_ONE: { sets: 1, gamesPerSet: 6, tiebreakAt: 6 },
-	BEST_OF_THREE: { sets: 3, gamesPerSet: 6, tiebreakAt: 6 },
-	SHORT_SET: { sets: 1, gamesPerSet: 4, tiebreakAt: 4 },
+	POINTS_BASED: {
+		sets: 1,
+		gamesPerSet: { min: 4, max: 32 },
+		tiebreak: {
+			goldenPoint: 'Golden point',
+			advantageDeuce: 'Advantage/Deuce',
+		},
+	},
+	SETS_BASED: {
+		sets: { min: 2, max: 8 },
+		gamesPerSet: { min: 4, max: 8 },
+		tiebreak: {
+			goldenPoint: 'Golden point',
+			advantageDeuce: 'Advantage/Deuce',
+		},
+	},
 };
 
 export const SCORING = {

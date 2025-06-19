@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Text } from '@/components/Themed';
 import CourtCardList from '@/screens/tournament-management/CourtCardList';
 import { useTournamentStore } from '@/stores/tournamentStore';
 import Screen from '@/components/Screen';
-import RoundList from '@/screens/tournament-management/RoundList';
+import RoundButtonList from '@/screens/tournament-management/RoundButtonList';
 
 type DraftScore = {
 	scoreA: number | null;
@@ -33,7 +33,7 @@ const TournamentManagement = () => {
 
 	return (
 		<Screen type={'SafeAreaView'}>
-			<RoundList
+			<RoundButtonList
 				rounds={tournament.rounds}
 				onRoundSelect={handleRoundSelect}
 				selectedRoundIndex={selectedRoundIndex}

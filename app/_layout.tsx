@@ -69,6 +69,10 @@ function RootLayoutNav() {
 						name='tournament-management'
 						options={{ headerShown: false }}
 					/>
+					<Stack.Screen
+						name='tournament-results'
+						options={{ headerShown: false }}
+					/>
 				</Stack>
 			</SafeAreaProvider>
 		</ThemeProvider>

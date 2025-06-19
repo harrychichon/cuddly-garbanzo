@@ -51,7 +51,7 @@ const CourtCard = ({
 
 	return (
 		<View style={[styles.card, hasUnsavedScore && styles.unsavedCard]}>
-			<Text style={styles.courtTitle}>Court {match.court}</Text>
+			<Text style={styles.courtTitle}>{match.court}</Text>
 
 			<View style={styles.matchup}>
 				<View style={styles.side}>

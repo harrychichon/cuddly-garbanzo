@@ -35,7 +35,8 @@ export const useTournamentStore = create<TournamentState>((set, get) => ({
 		const courtNames =
 			formData.courtNames ??
 			Array.from({ length: formData.courtCount }, (_, i) => `Bana ${i + 1}`);
-		const nameList =
+
+		const participants =
 			'playerCount' in formData
 				? formData.playerNames ??
 				  Array.from(
@@ -44,15 +45,22 @@ export const useTournamentStore = create<TournamentState>((set, get) => ({
 				  )
 				: formData.teamNames ??
 				  Array.from({ length: formData.teamCount }, (_, i) => `Lag ${i + 1}`);
-		const rounds = generateRoundRobinMatches(nameList, courtNames);
+
+		const rounds = generateRoundRobinMatches(participants, courtNames);
+
 		const tournament: Tournament = {
 			id,
 			name: formData.name,
 			format: formData.formatType,
+			matchFormat: formData.matchFormat,
+			scoringSystem: formData.scoringSystem,
+			courtCount: formData.courtCount,
+			courtNames,
+			participants,
+			startDate: formData.startDate,
 			createdAt: new Date().toISOString(),
 			status: 'active',
 			rounds,
-			settings: formData,
 		};
 		set((state) => ({
 			activeTournaments: [...state.activeTournaments, tournament],

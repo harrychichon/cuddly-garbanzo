@@ -1,3 +1,4 @@
+import { TOURNAMENT_FORMATS, MATCH_FORMATS, SCORING } from '@/configs';
 import { TournamentFormData } from '@/screens/tournament-setup';
 /* 
 export type Player = {
@@ -54,12 +55,29 @@ export type Match = {
 	scoreB: number | null;
 };
 
+// export type Tournament = {
+// 	id: string;
+// 	name: TournamentFormData['name'];
+// 	format: TournamentFormData['formatType'];
+// 	createdAt: string;
+// 	status: 'active' | 'completed';
+// 	rounds: Match[][];
+// 	settings: TournamentFormData;
+// };
+
 export type Tournament = {
 	id: string;
 	name: string;
-	format: TournamentFormData['formatType'];
+	format: keyof typeof TOURNAMENT_FORMATS;
+	matchFormat: keyof typeof MATCH_FORMATS;
+	scoringSystem?: keyof typeof SCORING;
+	courtCount: number;
+	courtNames: string[];
+	participants: string[]; // Combined playerNames/teamNames
+	startDate: string;
 	createdAt: string;
 	status: 'active' | 'completed';
 	rounds: Match[][];
-	settings: TournamentFormData;
+	winner?: string; // Winner name
+	// tournamentTable?: TournamentTableEntry[]; // You'd need to define this type
 };
