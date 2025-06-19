@@ -10,9 +10,8 @@ export function generateRoundRobinMatches(
 	const totalPlayers = playersOrTeams.length;
 	const even = totalPlayers % 2 === 0;
 	const players = [...playersOrTeams];
-	const id = nanoid();
 
-	if (!even) players.push('BYE'); // make even if odd count
+	if (!even) players.push('BYE');
 
 	const numRounds = players.length - 1;
 	const numMatchesPerRound = players.length / 2;
@@ -26,7 +25,7 @@ export function generateRoundRobinMatches(
 			if (home === 'BYE' || away === 'BYE') continue;
 
 			roundMatches.push({
-				id: id,
+				id: nanoid(),
 				court: courts[match % courts.length],
 				sideA: [home],
 				sideB: [away],

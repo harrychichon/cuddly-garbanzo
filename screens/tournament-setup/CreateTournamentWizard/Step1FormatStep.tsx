@@ -18,26 +18,12 @@ export const FormatStep = ({
 	onFormatSelect,
 }: Readonly<FormatStepProps>) => {
 	return (
-		<ScrollView showsVerticalScrollIndicator={false}>
+		//TODO Flytta ut turneringens namn från scrollview
+		//TODO lägg border på scrollview
+		<ScrollView
+			style={{ width: '100%' }}
+			showsVerticalScrollIndicator={false}>
 			<View style={{ gap: 24 }}>
-				<View>
-					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
-						Turneringens namn:
-					</Text>
-					<Controller
-						name='tournamentName'
-						control={control}
-						render={({ field: { onChange, value } }) => (
-							<InputText
-								label='Tournament Name'
-								value={value || ''}
-								onChangeText={onChange}
-								maxLength={50}
-							/>
-						)}
-					/>
-				</View>
-
 				<View>
 					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
 						Välj tävlingsformat:
@@ -67,6 +53,23 @@ export const FormatStep = ({
 								onFormatSelect(format);
 							}
 						}}
+					/>
+				</View>
+				<View>
+					<Text style={{ fontSize: 18, fontWeight: '600', marginBottom: 12 }}>
+						Turneringens namn:
+					</Text>
+					<Controller
+						name='name'
+						control={control}
+						render={({ field: { onChange, value } }) => (
+							<InputText
+								label='Tournament Name'
+								value={value || ''}
+								onChangeText={onChange}
+								maxLength={50}
+							/>
+						)}
 					/>
 				</View>
 			</View>

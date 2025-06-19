@@ -1,21 +1,37 @@
-import { View } from '@/components/Themed';
-import Button from '@/components/Button';
+import { ScrollView } from 'react-native';
+import { Match } from '@/types/types';
+import RoundButton from './RoundButton';
 
 type RoundListProps = {
-	roundsCount: number[];
+	rounds: Match[][];
+	onRoundSelect: (roundIndex: number) => void;
+	selectedRoundIndex: number;
 };
 
-const RoundList = ({ roundsCount }: Readonly<RoundListProps>) => {
+const RoundList = ({
+	rounds,
+	onRoundSelect,
+	selectedRoundIndex,
+}: Readonly<RoundListProps>) => {
 	return (
-		<View>
-			{roundsCount.map((number, index) => (
-				<Button
-					variant='positive'
-					key={`${index}-${number}`}
-					title={number.toString()}
+		<ScrollView
+			horizontal={true}
+			showsHorizontalScrollIndicator={false}
+			contentContainerStyle={{
+				flexDirection: 'row',
+				paddingHorizontal: 16,
+				gap: 8,
+			}}>
+			{rounds.map((round, index) => (
+				<RoundButton
+					key={`round-${index}`}
+					title={(index + 1).toString()}
+					roundIndex={index}
+					onPress={() => onRoundSelect(index)}
+					selectedRoundIndex={selectedRoundIndex}
 				/>
 			))}
-		</View>
+		</ScrollView>
 	);
 };
 

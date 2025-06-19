@@ -19,6 +19,8 @@ const FormatCardList = ({ onPress }: Readonly<FormatCardListProps>) => {
 			StyleSheet.create({
 				container: {
 					width: '100%',
+					justifyContent: 'center',
+					alignItems: 'stretch',
 				},
 				emptyText: {
 					textAlign: 'center',
@@ -48,7 +50,6 @@ const FormatCardList = ({ onPress }: Readonly<FormatCardListProps>) => {
 			data={AVAILABLE_FORMATS}
 			renderItem={({ item }) => renderCard(item)}
 			keyExtractor={(item) => item.name}
-			numColumns={2}
 			contentContainerStyle={styles.container}
 			ListEmptyComponent={renderEmpty}
 			showsVerticalScrollIndicator={false}

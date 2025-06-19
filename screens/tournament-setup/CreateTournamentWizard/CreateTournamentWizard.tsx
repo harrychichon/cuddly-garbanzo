@@ -37,7 +37,7 @@ const CreateTournamentWizard = ({
 	const { control, handleSubmit, setValue, getValues, watch } =
 		useForm<TournamentFormData>({
 			defaultValues: {
-				tournamentName: defaultTournamentName,
+				name: defaultTournamentName,
 				matchFormat:
 					'BEST_OF_ONE' as keyof typeof import('@/configs').MATCH_FORMATS,
 				formatType:
@@ -84,7 +84,7 @@ const CreateTournamentWizard = ({
 	const handleFormatSelect = (format: TournamentFormat) => {
 		setSelectedFormat(format);
 		const newDefaultName = `${format.name} ${today}`;
-		setValue('tournamentName', newDefaultName);
+		setValue('name', newDefaultName);
 		setValue(
 			'formatType',
 			format.name as keyof typeof import('@/configs').TOURNAMENT_FORMATS
@@ -122,7 +122,7 @@ const CreateTournamentWizard = ({
 	const canProceedToNext = () => {
 		switch (currentStep) {
 			case 0:
-				return selectedFormat && getValues('tournamentName')?.trim();
+				return selectedFormat && getValues('name')?.trim();
 			case 1:
 				return (
 					participantCount &&
@@ -174,7 +174,7 @@ const CreateTournamentWizard = ({
 	};
 
 	return (
-		<KeyboardAvoidingView style={{ flex: 1, padding: 16 }}>
+		<KeyboardAvoidingView style={{ flex: 1, padding: 16, width: '100%' }}>
 			<View style={{ marginBottom: 24 }}>
 				<Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 8 }}>
 					Skapa turnering

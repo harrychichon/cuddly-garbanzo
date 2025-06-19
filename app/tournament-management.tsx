@@ -1,46 +1,49 @@
-import { Text, View } from '@/components/Themed';
+import { useState } from 'react';
+import { Text } from '@/components/Themed';
+import CourtCardList from '@/screens/tournament-management/CourtCardList';
 import { useTournamentStore } from '@/stores/tournamentStore';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import Screen from '@/components/Screen';
+import RoundList from '@/screens/tournament-management/RoundList';
+
+type DraftScore = {
+	scoreA: number | null;
+	scoreB: number | null;
+};
 
 const TournamentManagement = () => {
 	const tournament = useTournamentStore((s) => s.selectedTournament);
+	const updateMatchScores = useTournamentStore((s) => s.updateMatchScores); // Assuming this exists
+	const [selectedRoundIndex, setSelectedRoundIndex] = useState(0);
 
 	if (!tournament) {
 		return <Text>Ingen turnering vald.</Text>;
 	}
 
+	const handleRoundSelect = (roundIndex: number) => {
+		setSelectedRoundIndex(roundIndex);
+	};
+
+	const handleRoundScoresSave = (draftScores: Record<string, DraftScore>) => {
+		updateMatchScores(tournament.id, selectedRoundIndex, draftScores);
+
+		if (selectedRoundIndex < tournament.rounds.length - 1) {
+			setSelectedRoundIndex((prev) => prev + 1);
+		}
+	};
+
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
-			<View style={styles.container}>
-				<Text>{tournament.name}</Text>
-				<Text>{tournament.format}</Text>
-				<Text>{tournament.createdAt}</Text>
-				<Text>{tournament.id}</Text>
-				<Text>{tournament.status}</Text>
-				<View>
-					{tournament.rounds.map((round, roundIdx) =>
-						round.map((element, matchIdx) => (
-							<>
-								<Text key={`${roundIdx}-${matchIdx}`}>{element.court}</Text>
-								<Text key={`${roundIdx}-${matchIdx}`}>{element.sideA}</Text>
-								<Text key={`${roundIdx}-${matchIdx}`}>{element.scoreA}</Text>
-								<Text key={`${roundIdx}-${matchIdx}`}> - </Text>
-								<Text key={`${roundIdx}-${matchIdx}`}>{element.scoreB}</Text>
-								<Text key={`${roundIdx}-${matchIdx}`}>{element.scoreB}</Text>
-							</>
-						))
-					)}
-				</View>
-			</View>
-		</SafeAreaView>
+		<Screen type={'SafeAreaView'}>
+			<RoundList
+				rounds={tournament.rounds}
+				onRoundSelect={handleRoundSelect}
+				selectedRoundIndex={selectedRoundIndex}
+			/>
+			<CourtCardList
+				matches={tournament.rounds[selectedRoundIndex]}
+				onRoundScoresSave={handleRoundScoresSave}
+			/>
+		</Screen>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-		gap: 4,
-	},
-});
 
 export default TournamentManagement;

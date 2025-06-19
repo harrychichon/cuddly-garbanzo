@@ -34,7 +34,7 @@ export const MatchFormatStep = ({
 						Match Format
 					</Text>
 					<Text style={{ fontSize: 14, color: '#666', marginBottom: 16 }}>
-						Choose how matches will be played
+						Välj
 					</Text>
 
 					<FormFieldRenderer

@@ -50,7 +50,7 @@ export const SCORING = {
 export const TOURNAMENT_FORMATS: Record<string, TournamentFormat> = {
 	AMERICANO_SINGLES: {
 		name: 'Americano Singles',
-		available: true,
+		available: false,
 		image: require('@/assets/images/singles.jpg'),
 		summary:
 			'Americano är en spelform där alla spelar med alla. Passar för en social och jämn turnering.',
@@ -68,7 +68,7 @@ export const TOURNAMENT_FORMATS: Record<string, TournamentFormat> = {
 	},
 	MEXICANO_SINGLES: {
 		name: 'Mexicano Singles',
-		available: true,
+		available: false,
 		image: require('@/assets/images/singles.jpg'),
 		summary:
 			'Mexicano är en spelform där spelare möter likvärdigt motstånd baserat på tidigare resultat.',
@@ -86,7 +86,7 @@ export const TOURNAMENT_FORMATS: Record<string, TournamentFormat> = {
 	},
 	BEAT_THE_BOX: {
 		name: 'Beat The Box',
-		available: true,
+		available: false,
 		image: require('@/assets/images/singles.jpg'),
 		summary:
 			'Beat the box är en individuell spelform där spelarna tävlar om att samla mest poäng.',

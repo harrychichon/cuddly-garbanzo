@@ -1,13 +1,10 @@
 import Button from '@/components/Button';
-import { View } from '@/components/Themed';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import Screen from '../components/Screen';
 
 export default function Home() {
 	const router = useRouter();
-
 	const handlePress = () => {
 		router.push({
 			pathname: '/tournament-setup',
@@ -15,21 +12,12 @@ export default function Home() {
 	};
 
 	return (
-		<SafeAreaView style={{ flex: 1 }}>
-			<View style={styles.container}>
-				<Button
-					onPress={handlePress}
-					title='Skapa turnering'
-					variant='positive'
-				/>
-			</View>
-		</SafeAreaView>
+		<Screen type={'SafeAreaView'}>
+			<Button
+				onPress={handlePress}
+				title='Skapa turnering'
+				variant='positive'
+			/>
+		</Screen>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-		gap: 4,
-	},
-});
