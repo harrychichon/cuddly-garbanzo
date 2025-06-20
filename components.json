@@ -1,6 +1,8 @@
 {
-  "aliases": {
-    "components": "@",
-    "lib": "@"
-  }
+	"aliases": {
+		"components": "@",
+		"lib": "@"
+	}
 }
+
+// TODO uppdatera den här
