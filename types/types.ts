@@ -1,5 +1,4 @@
-import { TOURNAMENT_FORMATS, MATCH_FORMATS, SCORING } from '@/configs';
-import { TournamentFormData } from '@/screens/tournament-setup';
+import { MATCH_FORMATS, SCORING, TOURNAMENT_FORMATS } from '@/configs';
 /* 
 export type Player = {
 	name: string;
@@ -80,4 +79,9 @@ export type Tournament = {
 	rounds: Match[][];
 	winner?: string; // Winner name
 	// tournamentTable?: TournamentTableEntry[];
+};
+
+export type DraftScore = {
+	scoreA: number | null;
+	scoreB: number | null;
 };

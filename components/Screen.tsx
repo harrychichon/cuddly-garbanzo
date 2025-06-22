@@ -1,6 +1,11 @@
 import { sizes } from '@/design-tokens';
 import { ReactNode } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import {
+	ScrollView,
+	StyleSheet,
+	useWindowDimensions,
+	View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 type ScreenProps = {
@@ -11,6 +16,26 @@ type ScreenProps = {
 const screenPadding = sizes.base.spacing;
 
 const Screen = ({ type, children }: Readonly<ScreenProps>) => {
+	const { width } = useWindowDimensions();
+	const styles = StyleSheet.create({
+		scrollContainer: {
+			paddingHorizontal: screenPadding,
+			paddingVertical: screenPadding,
+			flexGrow: 1,
+			width: width,
+		},
+		safeAreaContainer: {
+			flex: 1,
+			width: width,
+		},
+		content: {
+			flex: 1,
+			alignSelf: 'stretch',
+			alignItems: 'center',
+			justifyContent: 'flex-end',
+		},
+	});
+
 	if (type === 'ScrollView') {
 		return (
 			<ScrollView
@@ -27,22 +52,5 @@ const Screen = ({ type, children }: Readonly<ScreenProps>) => {
 		);
 	}
 };
-
-const styles = StyleSheet.create({
-	scrollContainer: {
-		paddingHorizontal: screenPadding,
-		paddingVertical: screenPadding,
-		flexGrow: 1,
-	},
-	safeAreaContainer: {
-		flex: 1,
-	},
-	content: {
-		flex: 1,
-		alignSelf: 'stretch',
-		alignItems: 'center',
-		justifyContent: 'flex-end',
-	},
-});
 
 export default Screen;

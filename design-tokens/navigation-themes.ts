@@ -10,7 +10,6 @@
 // 	typography: { ...typography },
 // };
 
-// //TODO Hur gör jag för att färger ska hämtas dynamiskt från colors.ts?
 // export const lightNavigationTheme = {
 // 	...DefaultTheme,
 // 	colors: {

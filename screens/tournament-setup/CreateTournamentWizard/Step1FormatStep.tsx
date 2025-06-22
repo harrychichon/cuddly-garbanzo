@@ -4,7 +4,7 @@ import { useAppTheme } from '@/hooks';
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
-import FormatCardList from '../FormatCardList/FormatCardList';
+import FormatCardList from '../FormatCardList';
 import { TournamentFormData } from '../types';
 
 type FormatStepProps = {
@@ -20,8 +20,6 @@ export const FormatStep = ({
 }: Readonly<FormatStepProps>) => {
 	const { theme } = useAppTheme();
 	return (
-		//TODO Flytta ut turneringens namn från scrollview
-		//TODO lägg border på scrollview
 		<ScrollView
 			style={{ width: '100%' }}
 			showsVerticalScrollIndicator={false}>

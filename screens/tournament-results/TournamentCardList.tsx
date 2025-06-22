@@ -1,18 +1,18 @@
-import { StyleSheet, ScrollView } from 'react-native';
-import { Tournament } from '@/types/types';
+import { useTournamentStore } from '@/stores/tournamentStore';
+import { ScrollView, StyleSheet } from 'react-native';
 import TournamentCard from './TournamentCard';
 
-type TournamentCardListProps = {
-	tournaments: Tournament[];
-};
-
-const TournamentCardList = ({ tournaments }: TournamentCardListProps) => {
-	//TODO onPress => expand och visa resultattabell, samt en knapp för att ta användaren till tournament-management-vy utan redigering
+const TournamentCardList = () => {
+	const activeTournaments = useTournamentStore((s) => s.activeTournaments);
+	const completedTournaments = useTournamentStore(
+		(s) => s.completedTournaments
+	);
+	const allTournaments = [...activeTournaments, ...completedTournaments];
 	return (
 		<ScrollView
 			style={styles.container}
 			showsVerticalScrollIndicator={false}>
-			{tournaments.map((tournament) => (
+			{allTournaments.map((tournament) => (
 				<TournamentCard
 					key={tournament.id}
 					tournament={tournament}
