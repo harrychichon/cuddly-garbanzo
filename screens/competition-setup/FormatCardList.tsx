@@ -1,9 +1,9 @@
-import { getAvailableFormats, TournamentFormat } from '@/configs';
+import { CompetitionFormat, getAvailableFormats } from '@/configs';
 import { sizes } from '@/design-tokens';
 import { useAppTheme } from '@/hooks';
 import { useMemo } from 'react';
 import { FlatList, StyleSheet, Text } from 'react-native';
-import FormatCard from '../FormatCard';
+import FormatCard from './FormatCard';
 
 type FormatCardListProps = {
 	onPress?: (formatType: string) => void;
@@ -30,7 +30,7 @@ const FormatCardList = ({ onPress }: Readonly<FormatCardListProps>) => {
 		[theme]
 	);
 
-	const renderCard = (item: TournamentFormat & { formatId: string }) => (
+	const renderCard = (item: CompetitionFormat & { formatId: string }) => (
 		<FormatCard
 			key={item.formatId}
 			formatId={item.formatId}

@@ -1,1 +1,1 @@
-// export * from './tournament-setup';
+// export * from './competition-setup';

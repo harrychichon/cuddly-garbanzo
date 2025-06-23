@@ -62,15 +62,15 @@ function RootLayoutNav() {
 						options={{ headerShown: false }}
 					/>
 					<Stack.Screen
-						name='tournament-setup'
+						name='competition-setup'
 						options={{ headerShown: false }}
 					/>
 					<Stack.Screen
-						name='tournament-management'
+						name='competition-management'
 						options={{ headerShown: false }}
 					/>
 					<Stack.Screen
-						name='tournament-results'
+						name='competition-results'
 						options={{ headerShown: false }}
 					/>
 				</Stack>

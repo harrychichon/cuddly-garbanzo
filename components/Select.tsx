@@ -1,18 +1,14 @@
 import { useAppTheme } from '@/hooks';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-type InputSelectProps<T = any> = {
+type SelectProps<T = any> = {
 	option: { value: T; label: string };
 	value: T;
 	onPress: (value: T) => void;
 };
 
-const InputSelect = <T,>({
-	option,
-	value,
-	onPress,
-}: Readonly<InputSelectProps<T>>) => {
+const Select = <T,>({ option, value, onPress }: Readonly<SelectProps<T>>) => {
 	const { theme } = useAppTheme();
 	const isSelected = value === option.value;
 	const styles = useMemo(
@@ -41,4 +37,4 @@ const InputSelect = <T,>({
 	);
 };
 
-export default InputSelect;
+export default Select;

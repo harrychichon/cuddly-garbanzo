@@ -1,12 +1,12 @@
-// Mock tournament data for testing
-import { Tournament } from '@/types/types';
+// Mock Competition data for testing
+import { Competition } from '@/types/types';
 
-export const mockTournaments: Tournament[] = [
-	// Active tournament - tennis singles, partially completed
+export const mockCompetitions: Competition[] = [
+	// Active Competition - tennis singles, partially completed
 	{
-		id: 'tournament-1',
+		id: 'Competition-1',
 		name: 'Sommarturnering Tennis 2025',
-		format: 'round-robin', // Assuming this matches your TOURNAMENT_FORMATS
+		format: 'round-robin', // Assuming this matches your Competition_FORMATS
 		matchFormat: 'best-of-3', // Assuming this matches your MATCH_FORMATS
 		scoringSystem: 'sets', // Assuming this matches your SCORING
 		courtCount: 2,
@@ -84,9 +84,9 @@ export const mockTournaments: Tournament[] = [
 		],
 	},
 
-	// Completed tournament - badminton doubles teams
+	// Completed Competition - badminton doubles teams
 	{
-		id: 'tournament-2',
+		id: 'Competition-2',
 		name: 'Företagsturnering Badminton',
 		format: 'round-robin',
 		matchFormat: 'best-of-3',
@@ -208,9 +208,9 @@ export const mockTournaments: Tournament[] = [
 		],
 	},
 
-	// Active tournament - table tennis, just started
+	// Active Competition - table tennis, just started
 	{
-		id: 'tournament-3',
+		id: 'Competition-3',
 		name: 'Pingis Liga Vinter',
 		format: 'round-robin',
 		matchFormat: 'best-of-5',
@@ -258,9 +258,9 @@ export const mockTournaments: Tournament[] = [
 		],
 	},
 
-	// Completed tournament - volleyball teams
+	// Completed Competition - volleyball teams
 	{
-		id: 'tournament-4',
+		id: 'Competition-4',
 		name: 'Beachvolley Masters',
 		format: 'round-robin',
 		matchFormat: 'best-of-3',
@@ -336,9 +336,9 @@ export const mockTournaments: Tournament[] = [
 		],
 	},
 
-	// Active tournament - squash, large field
+	// Active Competition - squash, large field
 	{
-		id: 'tournament-5',
+		id: 'Competition-5',
 		name: 'Squash Open Championship',
 		format: 'round-robin',
 		matchFormat: 'best-of-5',
@@ -421,5 +421,5 @@ export const mockTournaments: Tournament[] = [
 ];
 
 // You can use this in your store's initial state like:
-// activeTournaments: mockTournaments.filter(t => t.status === 'active'),
-// completedTournaments: mockTournaments.filter(t => t.status === 'completed'),
+// activeCompetitions: mockCompetitions.filter(t => t.status === 'active'),
+// completedCompetitions: mockCompetitions.filter(t => t.status === 'completed'),

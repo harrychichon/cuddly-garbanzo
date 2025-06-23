@@ -1,9 +1,11 @@
 import Screen from '@/components/Screen';
+import { View } from '@/components/Themed';
 import { sizes } from '@/design-tokens';
-import { CreateTournamentWizard } from '@/screens/tournament-setup';
-import { StyleSheet, View } from 'react-native';
+import CompetitionCardList from '@/screens/competition-results/CompetitionCardList';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
-const TournamentSetupScreen = () => {
+const CompetitionResultsScreen = () => {
 	const styles = StyleSheet.create({
 		container: {
 			flex: 1,
@@ -17,10 +19,10 @@ const TournamentSetupScreen = () => {
 	return (
 		<Screen type={'SafeAreaView'}>
 			<View style={styles.container}>
-				<CreateTournamentWizard />
+				<CompetitionCardList />
 			</View>
 		</Screen>
 	);
 };
 
-export default TournamentSetupScreen;
+export default CompetitionResultsScreen;

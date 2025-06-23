@@ -1,11 +1,11 @@
-import { MATCH_FORMATS, SCORING, TOURNAMENT_FORMATS } from '@/configs';
+import { COMPETITION_FORMATS, MATCH_FORMATS, SCORING } from '@/configs';
 
-export type TournamentFormData = {
+export type CompetitionFormData = {
 	id: string;
 	name: string;
 	matchFormat: keyof typeof MATCH_FORMATS;
 	scoringSystem?: keyof typeof SCORING;
-	formatType: keyof typeof TOURNAMENT_FORMATS;
+	formatType: keyof typeof COMPETITION_FORMATS;
 	courtCount: number;
 	courtNames?: string[];
 	startDate: string;
@@ -15,8 +15,8 @@ export type TournamentFormData = {
 );
 
 export const isSinglesFormat = (
-	data: TournamentFormData
-): data is TournamentFormData & {
+	data: CompetitionFormData
+): data is CompetitionFormData & {
 	playerCount: number;
 	playerNames?: string[];
 } => {
@@ -24,8 +24,11 @@ export const isSinglesFormat = (
 };
 
 export const isTeamFormat = (
-	data: TournamentFormData
-): data is TournamentFormData & { teamCount: number; teamNames?: string[] } => {
+	data: CompetitionFormData
+): data is CompetitionFormData & {
+	teamCount: number;
+	teamNames?: string[];
+} => {
 	return 'teamCount' in data;
 };
 

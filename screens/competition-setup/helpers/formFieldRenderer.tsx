@@ -1,13 +1,13 @@
-import InputSlider from '@/components/InputSlider';
-import InputText from '@/components/InputText';
+import InputSlider from '@/components/MySlider';
+import InputText from '@/components/MyTextInput';
 import { useAppTheme } from '@/hooks';
 import { Control, Controller } from 'react-hook-form';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { FormField, TournamentFormData } from '../types';
+import { CompetitionFormData, FormField } from '../types';
 
 type FormFieldRendererProps = {
 	field: FormField;
-	control: Control<TournamentFormData>;
+	control: Control<CompetitionFormData>;
 };
 
 export const FormFieldRenderer = ({
@@ -22,7 +22,7 @@ export const FormFieldRenderer = ({
 			return (
 				<Controller
 					key={key}
-					name={field.name as keyof TournamentFormData}
+					name={field.name as keyof CompetitionFormData}
 					control={control}
 					render={({ field: { onChange, value } }) => (
 						<InputText
@@ -43,7 +43,7 @@ export const FormFieldRenderer = ({
 					{field.options.map((option) => (
 						<Controller
 							key={`${key}-${option.value}`}
-							name={field.name as keyof TournamentFormData}
+							name={field.name as keyof CompetitionFormData}
 							control={control}
 							render={({ field: { onChange, value } }) => (
 								<>
@@ -81,7 +81,7 @@ export const FormFieldRenderer = ({
 			return (
 				<Controller
 					key={key}
-					name={field.name as keyof TournamentFormData}
+					name={field.name as keyof CompetitionFormData}
 					control={control}
 					render={({ field: { onChange, value } }) => (
 						<InputSlider

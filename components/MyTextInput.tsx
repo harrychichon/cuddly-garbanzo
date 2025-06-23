@@ -10,7 +10,7 @@ type TextInputProps = {
 	defaultValue?: string;
 };
 
-const InputText = ({
+const MyTextInput = ({
 	label,
 	value,
 	onChangeText,
@@ -55,4 +55,4 @@ const InputText = ({
 	);
 };
 
-export default InputText;
+export default MyTextInput;

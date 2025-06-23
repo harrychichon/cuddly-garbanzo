@@ -1,17 +1,17 @@
 import Screen from '@/components/Screen';
 import { Text } from '@/components/Themed';
-import CourtCardList from '@/screens/tournament-management/CourtCardList';
-import RoundButtonList from '@/screens/tournament-management/RoundButtonList';
-import { useTournamentStore } from '@/stores/tournamentStore';
+import { useCompetitionStore } from '@/stores/competitionStore';
 import { DraftScore } from '@/types/types';
 import React, { useState } from 'react';
+import CourtCardList from './CourtCardList';
+import RoundButtonList from './RoundButtonList';
 
-const TournamentManagementScreen = () => {
-	const tournament = useTournamentStore((s) => s.selectedTournament);
-	const updateMatchScores = useTournamentStore((s) => s.updateMatchScores);
+const CompetitionManagementScreen = () => {
+	const competition = useCompetitionStore((s) => s.selectedCompetition);
+	const updateMatchScores = useCompetitionStore((s) => s.updateMatchScores);
 	const [selectedRoundIndex, setSelectedRoundIndex] = useState(0);
 
-	if (!tournament) {
+	if (!competition) {
 		return <Text>Ingen turnering vald.</Text>;
 	}
 
@@ -20,9 +20,9 @@ const TournamentManagementScreen = () => {
 	};
 
 	const handleRoundScoresSave = (draftScores: Record<string, DraftScore>) => {
-		updateMatchScores(tournament.id, selectedRoundIndex, draftScores);
+		updateMatchScores(competition.id, selectedRoundIndex, draftScores);
 
-		if (selectedRoundIndex < tournament.rounds.length - 1) {
+		if (selectedRoundIndex < competition.rounds.length - 1) {
 			setSelectedRoundIndex((prev) => prev + 1);
 		}
 	};
@@ -30,16 +30,16 @@ const TournamentManagementScreen = () => {
 	return (
 		<Screen type={'SafeAreaView'}>
 			<RoundButtonList
-				rounds={tournament.rounds}
+				rounds={competition.rounds}
 				onRoundSelect={handleRoundSelect}
 				selectedRoundIndex={selectedRoundIndex}
 			/>
 			<CourtCardList
-				matches={tournament.rounds[selectedRoundIndex]}
+				matches={competition.rounds[selectedRoundIndex]}
 				onRoundScoresSave={handleRoundScoresSave}
 			/>
 		</Screen>
 	);
 };
 
-export default TournamentManagementScreen;
+export default CompetitionManagementScreen;

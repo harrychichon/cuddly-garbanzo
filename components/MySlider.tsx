@@ -3,7 +3,7 @@ import Slider from '@react-native-community/slider';
 import { useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-type InputSliderProps = {
+type InputMySliderProps = {
 	label: string;
 	minimumValue: number;
 	maximumValue: number;
@@ -13,7 +13,7 @@ type InputSliderProps = {
 	step?: number;
 };
 
-const InputSlider = ({
+const InputMySlider = ({
 	label,
 	units,
 	minimumValue,
@@ -21,7 +21,7 @@ const InputSlider = ({
 	step,
 	value,
 	onValueChange,
-}: Readonly<InputSliderProps>) => {
+}: Readonly<InputMySliderProps>) => {
 	const { theme } = useAppTheme();
 
 	const styles = useMemo(
@@ -68,4 +68,4 @@ const InputSlider = ({
 	);
 };
 
-export default InputSlider;
+export default InputMySlider;

@@ -1,13 +1,13 @@
-import InputSlider from '@/components/InputSlider';
-import InputText from '@/components/InputText';
+import InputSlider from '@/components/MySlider';
+import InputText from '@/components/MyTextInput';
 import { useAppTheme } from '@/hooks';
 import React, { useEffect, useState } from 'react';
 import { Control, Controller, useWatch } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
-import { TournamentFormData } from '../types';
+import { CompetitionFormData } from '../types';
 
 type CourtsStepProps = {
-	control: Control<TournamentFormData>;
+	control: Control<CompetitionFormData>;
 	maxCourts: number;
 	currentCourtCount: number;
 };

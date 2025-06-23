@@ -1,16 +1,16 @@
-import InputText from '@/components/InputText';
-import { getTournamentFormat, TournamentFormat } from '@/configs';
+import InputText from '@/components/MyTextInput';
+import { CompetitionFormat, getCompetitionFormat } from '@/configs';
 import { useAppTheme } from '@/hooks';
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
 import FormatCardList from '../FormatCardList';
-import { TournamentFormData } from '../types';
+import { CompetitionFormData } from '../types';
 
 type FormatStepProps = {
-	control: Control<TournamentFormData>;
-	selectedFormat: TournamentFormat | null;
-	onFormatSelect: (format: TournamentFormat) => void;
+	control: Control<CompetitionFormData>;
+	selectedFormat: CompetitionFormat | null;
+	onFormatSelect: (format: CompetitionFormat) => void;
 };
 
 export const FormatStep = ({
@@ -54,7 +54,7 @@ export const FormatStep = ({
 					)}
 					<FormatCardList
 						onPress={(formatId) => {
-							const format = getTournamentFormat(formatId);
+							const format = getCompetitionFormat(formatId);
 							if (format) {
 								onFormatSelect(format);
 							}

@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import Button from '@/components/MyButton';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import Screen from '../components/Screen';
@@ -7,12 +7,12 @@ export default function Home() {
 	const router = useRouter();
 	const handlePressCreate = () => {
 		router.push({
-			pathname: '/tournament-setup',
+			pathname: '/competition-setup',
 		});
 	};
-	const handlePressMyTournaments = () => {
+	const handlePressMyCompetitions = () => {
 		router.push({
-			pathname: '/tournament-results',
+			pathname: '/competition-results',
 		});
 	};
 
@@ -20,12 +20,12 @@ export default function Home() {
 		<Screen type={'SafeAreaView'}>
 			<Button
 				onPress={handlePressCreate}
-				title='Skapa turnering'
+				title='Skapa tävling'
 				variant='positive'
 			/>
 			<Button
-				onPress={handlePressMyTournaments}
-				title='Mina turneringar'
+				onPress={handlePressMyCompetitions}
+				title='Mina tävlingar'
 				variant='positive'
 			/>
 		</Screen>

@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import Button from '@/components/MyButton';
 import { Match } from '@/types/types';
 import { useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';

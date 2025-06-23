@@ -3,23 +3,23 @@ import { useAppTheme } from '@/hooks';
 import { useMemo } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-type ButtonProps = {
+type MyButtonProps = {
 	variant: 'positive' | 'negative' | 'neutral';
 	onPress?: () => void;
 	title?: string;
 	disabled?: boolean;
 };
 
-const Button = ({
+const MyButton = ({
 	onPress,
 	title,
 	variant,
 	disabled = false,
-}: Readonly<ButtonProps>) => {
+}: Readonly<MyButtonProps>) => {
 	const { theme } = useAppTheme();
 
 	const getVariantColors = (
-		variant: ButtonProps['variant'],
+		variant: MyButtonProps['variant'],
 		disabled: boolean
 	) => {
 		if (disabled) {
@@ -49,7 +49,7 @@ const Button = ({
 	const styles = useMemo(() => {
 		const variantColors = getVariantColors(variant, disabled);
 		return StyleSheet.create({
-			button: {
+			MyButton: {
 				width: '100%',
 				backgroundColor: variantColors.backgroundColor,
 				borderRadius: sizes.radius?.full || 25,
@@ -69,7 +69,7 @@ const Button = ({
 
 	return (
 		<TouchableOpacity
-			style={styles.button}
+			style={styles.MyButton}
 			onPress={disabled ? undefined : onPress}
 			disabled={disabled}>
 			<Text style={styles.text}>{title}</Text>
@@ -77,4 +77,4 @@ const Button = ({
 	);
 };
 
-export default Button;
+export default MyButton;

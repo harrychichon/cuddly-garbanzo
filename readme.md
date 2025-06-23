@@ -8,7 +8,7 @@
 
 ### 🧑‍🤝‍🧑 For Users
 
-- 🏆 **Create & Manage Competitions** – Choose from multiple tournament formats and rule sets.
+- 🏆 **Create & Manage Competitions** – Choose from multiple competition formats and rule sets.
 - 🗓️ **Auto Scheduling** – Matches are automatically generated based on format and participants.
 - 📈 **Follow Results** – View match-by-match results and competition-wide standings.
 - 📂 **Competition Overview** – See your ongoing and completed competitions at a glance.

@@ -3,10 +3,10 @@ import { useAppTheme } from '@/hooks';
 import { Control, useWatch } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
 import { FormFieldRenderer } from '../helpers/formFieldRenderer';
-import { TournamentFormData } from '../types';
+import { CompetitionFormData } from '../types';
 
 type MatchFormatStepProps = {
-	control: Control<TournamentFormData>;
+	control: Control<CompetitionFormData>;
 };
 
 export const MatchFormatStep = ({

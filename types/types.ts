@@ -1,4 +1,4 @@
-import { MATCH_FORMATS, SCORING, TOURNAMENT_FORMATS } from '@/configs';
+import { COMPETITION_FORMATS, MATCH_FORMATS, SCORING } from '@/configs';
 /* 
 export type Player = {
 	name: string;
@@ -64,10 +64,10 @@ export type Match = {
 // 	settings: TournamentFormData;
 // };
 
-export type Tournament = {
+export type Competition = {
 	id: string;
 	name: string;
-	format: keyof typeof TOURNAMENT_FORMATS;
+	format: keyof typeof COMPETITION_FORMATS;
 	matchFormat: keyof typeof MATCH_FORMATS;
 	scoringSystem?: keyof typeof SCORING;
 	courtCount: number;

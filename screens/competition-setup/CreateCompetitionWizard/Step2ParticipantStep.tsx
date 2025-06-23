@@ -1,15 +1,15 @@
-import InputSlider from '@/components/InputSlider';
-import InputText from '@/components/InputText';
-import { TournamentFormat } from '@/configs';
+import InputSlider from '@/components/MySlider';
+import InputText from '@/components/MyTextInput';
+import { CompetitionFormat } from '@/configs';
 import { useAppTheme } from '@/hooks';
 import React, { useEffect, useState } from 'react';
 import { Control, Controller, useWatch } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
-import { TournamentFormData } from '../types';
+import { CompetitionFormData } from '../types';
 
 type ParticipantsStepProps = {
-	control: Control<TournamentFormData>;
-	format: TournamentFormat;
+	control: Control<CompetitionFormData>;
+	format: CompetitionFormat;
 	participantCount: number;
 };
 

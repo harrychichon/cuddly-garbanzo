@@ -1,51 +1,51 @@
-import Button from '@/components/Button';
-import { calculateMaxCourts, TournamentFormat } from '@/configs';
+import Button from '@/components/MyButton';
+import { calculateMaxCourts, CompetitionFormat } from '@/configs';
 import { useAppTheme } from '@/hooks';
-import { useTournamentStore } from '@/stores/tournamentStore';
 import { useRouter } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
-import { TournamentFormData } from '../types';
+
+import { useCompetitionStore } from '@/stores/competitionStore';
+import { CompetitionFormData } from '../types';
 import { FormatStep } from './Step1FormatStep';
 import { ParticipantsStep } from './Step2ParticipantStep';
 import { CourtsStep } from './Step3CourtsStep';
 import { MatchFormatStep } from './Step4MatchFormatStep';
 
-type CreateTournamentWizardProps = {
-	initialFormat?: TournamentFormat;
+type CreateCompetitionWizardProps = {
+	initialFormat?: CompetitionFormat;
 	onSubmit?: () => void;
 	onCancel?: () => void;
 };
 
-const CreateTournamentWizard = ({
+const CreateCompetitionWizard = ({
 	initialFormat,
 	onSubmit,
 	onCancel,
-}: Readonly<CreateTournamentWizardProps>) => {
+}: Readonly<CreateCompetitionWizardProps>) => {
 	const { theme } = useAppTheme();
-	const { createTournament } = useTournamentStore.getState();
+	const { createCompetition } = useCompetitionStore.getState();
 	const [currentStep, setCurrentStep] = useState(0);
-	const [selectedFormat, setSelectedFormat] = useState<TournamentFormat | null>(
-		initialFormat || null
-	);
+	const [selectedFormat, setSelectedFormat] =
+		useState<CompetitionFormat | null>(initialFormat || null);
 	const router = useRouter();
 
 	const today = new Date().toISOString().split('T')[0];
-	const defaultTournamentName = selectedFormat
+	const defaultCompetitionName = selectedFormat
 		? `${selectedFormat.name} ${today}`
 		: '';
 
 	const { control, handleSubmit, setValue, getValues, watch } =
-		useForm<TournamentFormData>({
+		useForm<CompetitionFormData>({
 			defaultValues: {
-				name: defaultTournamentName,
+				name: defaultCompetitionName,
 				matchFormat:
 					'BEST_OF_ONE' as keyof typeof import('@/configs').MATCH_FORMATS,
 				formatType:
-					selectedFormat?.name as keyof typeof import('@/configs').TOURNAMENT_FORMATS,
-				...(selectedFormat?.type === 'singles'
-					? { playerCount: selectedFormat.playerRange.min }
+					selectedFormat?.name as keyof typeof import('@/configs').COMPETITION_FORMATS,
+				...(selectedFormat?.formatType === 'singles'
+					? { playerCount: selectedFormat.playerRange?.min }
 					: { teamCount: selectedFormat?.teamRange?.min || 2 }),
 				courtCount: 1,
 			},
@@ -53,13 +53,13 @@ const CreateTournamentWizard = ({
 
 	// Håller koll på antal deltagare för dynamisk beräkning av antal banor
 	const participantCountFieldName =
-		selectedFormat?.type === 'singles' ? 'playerCount' : 'teamCount';
+		selectedFormat?.formatType === 'singles' ? 'playerCount' : 'teamCount';
 	const participantCount = useWatch({
 		control,
 		name: participantCountFieldName,
 		defaultValue:
-			selectedFormat?.type === 'singles'
-				? selectedFormat.playerRange.min
+			selectedFormat?.formatType === 'singles'
+				? selectedFormat.playerRange?.min
 				: selectedFormat?.teamRange?.min || 2,
 	});
 
@@ -89,17 +89,17 @@ const CreateTournamentWizard = ({
 		});
 	};
 
-	const handleFormatSelect = (format: TournamentFormat) => {
+	const handleFormatSelect = (format: CompetitionFormat) => {
 		setSelectedFormat(format);
 		const newDefaultName = `${format.name} ${today}`;
 		setValue('name', newDefaultName);
 		setValue(
 			'formatType',
-			format.name as keyof typeof import('@/configs').TOURNAMENT_FORMATS
+			format.name as keyof typeof import('@/configs').COMPETITION_FORMATS
 		);
 
 		// Bestämmer default för antal spelare
-		if (format.type === 'singles') {
+		if (format.formatType === 'singles') {
 			setValue('playerCount', format.playerRange.min);
 		} else {
 			setValue('teamCount', format.teamRange.min);
@@ -109,7 +109,7 @@ const CreateTournamentWizard = ({
 		setValue('courtCount', 1);
 	};
 
-	const handleFormSubmit = async (data: TournamentFormData) => {
+	const handleFormSubmit = async (data: CompetitionFormData) => {
 		if (!selectedFormat?.name) return;
 
 		const formattedData = {
@@ -118,12 +118,12 @@ const CreateTournamentWizard = ({
 		};
 
 		try {
-			await createTournament(formattedData);
+			await createCompetition(formattedData);
 			router.push({
-				pathname: '/tournament-management',
+				pathname: '/competition-management',
 			});
 		} catch (err) {
-			console.error('Error creating tournament:', err);
+			console.error('Error creating competition:', err);
 		}
 	};
 
@@ -135,7 +135,7 @@ const CreateTournamentWizard = ({
 				return (
 					participantCount &&
 					participantCount >=
-						(selectedFormat?.type === 'singles'
+						(selectedFormat?.formatType === 'singles'
 							? selectedFormat.playerRange.min
 							: selectedFormat?.teamRange?.min || 2)
 				);
@@ -266,4 +266,4 @@ const CreateTournamentWizard = ({
 	);
 };
 
-export default CreateTournamentWizard;
+export default CreateCompetitionWizard;
