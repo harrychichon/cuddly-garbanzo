@@ -1,6 +1,6 @@
-import { Text } from '@/components/Themed';
+import { Text } from '@/components/';
 import { useAppTheme } from '@/hooks';
-import isSelected from '@/utils/isSelected';
+import { isSelected } from '@/utils';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
 type RoundButtonProps = {

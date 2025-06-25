@@ -1,4 +1,4 @@
-const isSelected = <T extends { id: string }>(
+export const isSelected = <T extends { id: string }>(
 	selected: T | string | null,
 	current: T | string
 ): boolean => {
@@ -6,5 +6,3 @@ const isSelected = <T extends { id: string }>(
 	const currentId = typeof current === 'string' ? current : current?.id;
 	return selectedId === currentId;
 };
-
-export default isSelected;

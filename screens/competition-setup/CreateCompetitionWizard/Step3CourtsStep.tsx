@@ -1,10 +1,9 @@
-import InputSlider from '@/components/MySlider';
-import InputText from '@/components/MyTextInput';
+import { MySlider, MyTextInput } from '@/components/';
 import { useAppTheme } from '@/hooks';
+import { CompetitionFormData } from '@/screens/';
 import React, { useEffect, useState } from 'react';
 import { Control, Controller, useWatch } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
-import { CompetitionFormData } from '../types';
 
 type CourtsStepProps = {
 	control: Control<CompetitionFormData>;
@@ -66,7 +65,7 @@ export const CourtsStep = ({
 						name='courtCount'
 						control={control}
 						render={({ field: { onChange, value } }) => (
-							<InputSlider
+							<MySlider
 								label='Number of Courts'
 								minimumValue={1}
 								maximumValue={maxCourts}
@@ -100,7 +99,7 @@ export const CourtsStep = ({
 
 					<View style={{ gap: 12 }}>
 						{courtNames.map((name, index) => (
-							<InputText
+							<MyTextInput
 								key={index + name}
 								label={`Court ${index + 1}`}
 								value={name}

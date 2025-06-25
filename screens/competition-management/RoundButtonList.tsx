@@ -1,5 +1,5 @@
+import { Match } from '@/types/';
 import { ScrollView } from 'react-native';
-import { Match } from '@/types/types';
 import RoundButton from './RoundButton';
 
 type RoundButtonListProps = {

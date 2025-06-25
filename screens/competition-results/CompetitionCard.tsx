@@ -1,5 +1,5 @@
-import Card from '@/components/Card';
-import { Text } from '@/components/Themed';
+import { Card, Text } from '@/components/';
+import { Competition } from '@/types';
 
 type CompetitionCardProps = {
 	competition: Competition;

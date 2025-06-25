@@ -1,5 +1,5 @@
-import Button from '@/components/MyButton';
-import { Match } from '@/types/types';
+import { Button } from '@/components/';
+import { Match } from '@/types/';
 import { useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import CourtCard from './CourtCard';

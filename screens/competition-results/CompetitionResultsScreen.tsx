@@ -1,7 +1,6 @@
-import Screen from '@/components/Screen';
-import { View } from '@/components/Themed';
+import { Screen, View } from '@/components/';
 import { sizes } from '@/design-tokens';
-import CompetitionCardList from '@/screens/competition-results/CompetitionCardList';
+import { CompetitionCardList } from '@/screens/competition-results/';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 

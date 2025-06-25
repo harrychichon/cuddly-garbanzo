@@ -1,9 +1,8 @@
 import { MATCH_FORMATS } from '@/configs';
 import { useAppTheme } from '@/hooks';
+import { CompetitionFormData, FormFieldRenderer } from '@/screens/';
 import { Control, useWatch } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
-import { FormFieldRenderer } from '../helpers/formFieldRenderer';
-import { CompetitionFormData } from '../types';
 
 type MatchFormatStepProps = {
 	control: Control<CompetitionFormData>;

@@ -1,4 +1,4 @@
-import { useCompetitionStore } from '@/stores/competitionStore';
+import { useCompetitionStore } from '@/stores/';
 import { ScrollView, StyleSheet } from 'react-native';
 import CompetitionCard from './CompetitionCard';
 

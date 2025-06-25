@@ -1,17 +1,18 @@
-import Button from '@/components/MyButton';
+import { Button } from '@/components/';
 import { calculateMaxCourts, CompetitionFormat } from '@/configs';
 import { useAppTheme } from '@/hooks';
+import { useCompetitionStore } from '@/stores/';
 import { useRouter } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { KeyboardAvoidingView, Text, View } from 'react-native';
-
-import { useCompetitionStore } from '@/stores/competitionStore';
+import {
+	CourtsStep,
+	FormatStep,
+	MatchFormatStep,
+	ParticipantsStep,
+} from '../CreateCompetitionWizard/';
 import { CompetitionFormData } from '../types';
-import { FormatStep } from './Step1FormatStep';
-import { ParticipantsStep } from './Step2ParticipantStep';
-import { CourtsStep } from './Step3CourtsStep';
-import { MatchFormatStep } from './Step4MatchFormatStep';
 
 type CreateCompetitionWizardProps = {
 	initialFormat?: CompetitionFormat;

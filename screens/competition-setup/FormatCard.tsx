@@ -1,4 +1,4 @@
-import Card from '@/components/Card';
+import { Card } from '@/components/';
 import { ImageSourcePropType, Pressable } from 'react-native';
 
 type FormatCardProps = {

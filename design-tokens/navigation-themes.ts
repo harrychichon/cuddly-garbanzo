@@ -1,33 +1,3 @@
-// import { DarkTheme, DefaultTheme } from '@react-navigation/native';
-// import colors from './colors';
-// import shadows from './shadows';
-// import sizes from './sizes';
-// import typography from './typography';
-
-// const otherVariables = {
-// 	shadows: { ...shadows },
-// 	sizes: { ...sizes },
-// 	typography: { ...typography },
-// };
-
-// export const lightNavigationTheme = {
-// 	...DefaultTheme,
-// 	colors: {
-// 		...DefaultTheme.colors,
-// 		...colors.light,
-// 	},
-// 	...otherVariables,
-// };
-
-// export const darkNavigationTheme = {
-// 	...DarkTheme,
-// 	colors: {
-// 		...DarkTheme.colors,
-// 		...colors.dark,
-// 	},
-// 	...otherVariables,
-// };
-
 import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 import colors from './colors';
 import shadows from './shadows';

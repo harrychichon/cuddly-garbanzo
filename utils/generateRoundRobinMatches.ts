@@ -1,6 +1,6 @@
-import 'react-native-get-random-values';
-import { Match } from '@/types/types';
+import { Match } from '@/types/';
 import { nanoid } from 'nanoid';
+import 'react-native-get-random-values';
 
 export function generateRoundRobinMatches(
 	playersOrTeams: string[],

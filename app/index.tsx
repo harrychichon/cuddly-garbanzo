@@ -1,4 +1,4 @@
-import Button from '@/components/MyButton';
+import Button from '@/components/Button';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import Screen from '../components/Screen';

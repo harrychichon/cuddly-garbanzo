@@ -1,9 +1,9 @@
 import { CompetitionFormat, getAvailableFormats } from '@/configs';
 import { sizes } from '@/design-tokens';
 import { useAppTheme } from '@/hooks';
+import { FormatCard } from '@/screens/competition-setup';
 import { useMemo } from 'react';
 import { FlatList, StyleSheet, Text } from 'react-native';
-import FormatCard from './FormatCard';
 
 type FormatCardListProps = {
 	onPress?: (formatType: string) => void;

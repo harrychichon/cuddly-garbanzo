@@ -1,7 +1,6 @@
-import Screen from '@/components/Screen';
-import { Text } from '@/components/Themed';
-import { useCompetitionStore } from '@/stores/competitionStore';
-import { DraftScore } from '@/types/types';
+import { Screen, Text } from '@/components/';
+import { useCompetitionStore } from '@/stores/';
+import { DraftScore } from '@/types/';
 import React, { useState } from 'react';
 import CourtCardList from './CourtCardList';
 import RoundButtonList from './RoundButtonList';

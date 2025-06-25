@@ -1,6 +1,6 @@
-import { Text } from '@/components/Themed';
+import { Text } from '@/components/';
 import { useAppTheme } from '@/hooks';
-import { Match } from '@/types/types';
+import { Match } from '@/types/';
 import { useEffect, useState } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 

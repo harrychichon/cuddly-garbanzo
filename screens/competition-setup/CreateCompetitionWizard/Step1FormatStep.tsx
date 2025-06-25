@@ -1,11 +1,11 @@
-import InputText from '@/components/MyTextInput';
+import { MyTextInput } from '@/components/';
 import { CompetitionFormat, getCompetitionFormat } from '@/configs';
 import { useAppTheme } from '@/hooks';
+import { CompetitionFormData } from '@/screens/';
+import { FormatCardList } from '@/screens/competition-setup';
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
-import FormatCardList from '../FormatCardList';
-import { CompetitionFormData } from '../types';
 
 type FormatStepProps = {
 	control: Control<CompetitionFormData>;
@@ -66,7 +66,7 @@ export const FormatStep = ({
 						name='name'
 						control={control}
 						render={({ field: { onChange, value } }) => (
-							<InputText
+							<MyTextInput
 								label='Turneringens namn:'
 								value={value || ''}
 								onChangeText={onChange}

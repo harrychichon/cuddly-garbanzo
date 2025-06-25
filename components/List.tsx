@@ -1,4 +1,4 @@
-import isSelected from '@/utils/isSelected';
+import { isSelected } from '@/utils/';
 import React from 'react';
 import { FlatList, StyleSheet, Text, ViewStyle } from 'react-native';
 

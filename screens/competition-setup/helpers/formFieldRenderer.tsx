@@ -1,9 +1,8 @@
-import InputSlider from '@/components/MySlider';
-import InputText from '@/components/MyTextInput';
+import { MySlider, MyTextInput } from '@/components/';
 import { useAppTheme } from '@/hooks';
+import { CompetitionFormData, FormField } from '@/screens';
 import { Control, Controller } from 'react-hook-form';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { CompetitionFormData, FormField } from '../types';
 
 type FormFieldRendererProps = {
 	field: FormField;
@@ -25,7 +24,7 @@ export const FormFieldRenderer = ({
 					name={field.name as keyof CompetitionFormData}
 					control={control}
 					render={({ field: { onChange, value } }) => (
-						<InputText
+						<MyTextInput
 							label={field.label}
 							value={value as string}
 							onChangeText={onChange}
@@ -84,7 +83,7 @@ export const FormFieldRenderer = ({
 					name={field.name as keyof CompetitionFormData}
 					control={control}
 					render={({ field: { onChange, value } }) => (
-						<InputSlider
+						<MySlider
 							label={field.label}
 							units={field.unit}
 							minimumValue={field.min}

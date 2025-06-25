@@ -1,11 +1,10 @@
-import InputSlider from '@/components/MySlider';
-import InputText from '@/components/MyTextInput';
+import { MySlider, MyTextInput } from '@/components/';
 import { CompetitionFormat } from '@/configs';
 import { useAppTheme } from '@/hooks';
+import { CompetitionFormData } from '@/screens/';
 import React, { useEffect, useState } from 'react';
 import { Control, Controller, useWatch } from 'react-hook-form';
 import { ScrollView, Text, View } from 'react-native';
-import { CompetitionFormData } from '../types';
 
 type ParticipantsStepProps = {
 	control: Control<CompetitionFormData>;
@@ -65,7 +64,7 @@ export const ParticipantsStep = ({
 						name={isSingles ? 'playerCount' : 'teamCount'}
 						control={control}
 						render={({ field: { onChange, value } }) => (
-							<InputSlider
+							<MySlider
 								label={`Number of ${participantLabelPlural}`}
 								minimumValue={range.min}
 								maximumValue={range.max}
@@ -94,7 +93,7 @@ export const ParticipantsStep = ({
 
 					<View style={{ gap: 12 }}>
 						{participantNames.map((name, index) => (
-							<InputText
+							<MyTextInput
 								key={index + name}
 								label={`${participantLabel} ${index + 1}`}
 								value={name}

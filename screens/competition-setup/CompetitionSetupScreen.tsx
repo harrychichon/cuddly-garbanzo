@@ -1,7 +1,7 @@
-import Screen from '@/components/Screen';
+import { Screen } from '@/components/';
 import { sizes } from '@/design-tokens';
+import { CreateCompetitionWizard } from '@/screens/competition-setup';
 import { StyleSheet, View } from 'react-native';
-import CreateCompetitionWizard from './CreateCompetitionWizard/CreateCompetitionWizard';
 
 const CompetitionSetupScreen = () => {
 	const styles = StyleSheet.create({
