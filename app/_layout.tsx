@@ -54,23 +54,7 @@ function RootLayoutNav() {
 			<SafeAreaProvider>
 				<Stack>
 					<Stack.Screen
-						name='index'
-						options={{ headerShown: false }}
-					/>
-					<Stack.Screen
-						name='+not-found'
-						options={{ headerShown: false }}
-					/>
-					<Stack.Screen
-						name='competition-setup'
-						options={{ headerShown: false }}
-					/>
-					<Stack.Screen
-						name='competition-management'
-						options={{ headerShown: false }}
-					/>
-					<Stack.Screen
-						name='competition-results'
+						name='(tabs)'
 						options={{ headerShown: false }}
 					/>
 				</Stack>

@@ -1,7 +1,7 @@
-import Button from '@/components/Button';
+import { MyButton, Screen } from '@/components/';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import Screen from '../components/Screen';
+import { Text } from 'react-native';
 
 export default function Home() {
 	const router = useRouter();
@@ -18,12 +18,13 @@ export default function Home() {
 
 	return (
 		<Screen type={'SafeAreaView'}>
-			<Button
+			<Text>Spelarens schema kommer här.</Text>
+			<MyButton
 				onPress={handlePressCreate}
 				title='Skapa tävling'
 				variant='positive'
 			/>
-			<Button
+			<MyButton
 				onPress={handlePressMyCompetitions}
 				title='Mina tävlingar'
 				variant='positive'
