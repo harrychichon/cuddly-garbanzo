@@ -1,8 +1,9 @@
 import { MySlider, MyTextInput } from '@/components/';
 import { useAppTheme } from '@/hooks';
-import { CompetitionFormData, FormField } from '@/screens';
+import { CompetitionFormData } from '@/screens';
 import { Control, Controller } from 'react-hook-form';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { FormField } from './types';
 
 type FormFieldRendererProps = {
 	field: FormField;

@@ -64,6 +64,7 @@ export type Match = {
 // 	settings: TournamentFormData;
 // };
 
+// The competitions type once entered into the state
 export type Competition = {
 	id: string;
 	name: string;

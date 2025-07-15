@@ -1,4 +1,7 @@
+import { CompetitionFormData, isSinglesFormat, isTeamFormat } from '@/screens';
 import { ImageSourcePropType } from 'react-native';
+
+export type FormatType = 'singles' | 'doubles';
 
 export type ParticipantRange = {
 	min: number;
@@ -16,22 +19,28 @@ export type CompetitionBase = {
 
 export type TournamentFormat = CompetitionBase & {
 	competitionType: 'tournament';
-	formatType: 'singles' | 'doubles';
+	formatType: FormatType;
 	playerRange?: ParticipantRange;
 	teamRange?: ParticipantRange;
 };
 
 export type LeagueFormat = CompetitionBase & {
 	competitionType: 'league';
-	formatType: 'singles' | 'doubles';
+	formatType: FormatType;
 	playerRange?: ParticipantRange;
 	teamRange?: ParticipantRange;
 };
 
 export type CompetitionFormat = TournamentFormat | LeagueFormat;
 
-export const calculateMaxCourts = (participantCount: number): number => {
-	return Math.floor(participantCount / 2);
+export const calculateMaxCourts = (data: CompetitionFormData): number => {
+	if (isSinglesFormat(data)) {
+		return Math.floor(data.playerCount / 4);
+	} else if (isTeamFormat(data)) {
+		return Math.floor(data.teamCount / 2);
+	} else {
+		throw new Error('Invalid format type selected');
+	}
 };
 
 export const getAvailableFormats = () =>
@@ -68,6 +77,8 @@ export const SCORING = {
 	min: 4,
 	max: 32,
 };
+
+export const PARTICIPANT_FORMAT = {};
 
 export const COMPETITION_FORMATS: Record<string, CompetitionFormat> = {
 	AMERICANO_SINGLES: {

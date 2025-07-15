@@ -1,4 +1,4 @@
-import { Button } from '@/components/';
+import { MyButton } from '@/components';
 import { calculateMaxCourts, CompetitionFormat } from '@/configs';
 import { useAppTheme } from '@/hooks';
 import { useCompetitionStore } from '@/stores/';
@@ -66,8 +66,17 @@ const CreateCompetitionWizard = ({
 
 	// Dynamisk beräkning av antal banor baserat på antal deltagare
 	const maxCourts = useMemo(() => {
-		if (!participantCount) return 1;
-		return calculateMaxCourts(participantCount as number);
+		if (!selectedFormat || !participantCount) return 1;
+
+		const tempData = {
+			formatType: selectedFormat.formatType,
+			// add the relevant count field
+			...(selectedFormat.formatType === 'singles'
+				? { playerCount: participantCount }
+				: { teamCount: participantCount }),
+		} as CompetitionFormData;
+
+		return calculateMaxCourts(tempData);
 	}, [selectedFormat, participantCount]);
 
 	const steps = ['Tävlingsform & namn', 'Deltagare', 'Banor', 'Matchformat'];
@@ -221,7 +230,7 @@ const CreateCompetitionWizard = ({
 			{/* Step content */}
 			<View style={{ flex: 1 }}>{renderStep()}</View>
 
-			{/* Navigation buttons */}
+			{/* Navigation MyButtons */}
 			<View
 				style={{
 					flexDirection: 'row',
@@ -231,13 +240,13 @@ const CreateCompetitionWizard = ({
 				}}>
 				<View style={{ flex: 1 }}>
 					{currentStep > 0 ? (
-						<Button
+						<MyMyButton
 							variant='negative'
 							title='Bakåt'
 							onPress={handlePrevious}
 						/>
 					) : (
-						<Button
+						<MyButton
 							variant='negative'
 							title='Avbryt'
 							onPress={handleCancel}
@@ -247,14 +256,14 @@ const CreateCompetitionWizard = ({
 
 				<View style={{ flex: 1 }}>
 					{currentStep < steps.length - 1 ? (
-						<Button
+						<MyButton
 							variant='positive'
 							title='Nästa'
 							onPress={handleNext}
 							disabled={!canProceedToNext()}
 						/>
 					) : (
-						<Button
+						<MyButton
 							variant='positive'
 							title='Skapa turnering'
 							onPress={handleSubmit(handleFormSubmit)}

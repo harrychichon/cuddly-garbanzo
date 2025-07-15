@@ -55,5 +55,6 @@ export default {
 		containerPadding: 20,
 		cardPadding: 16,
 		sectionSpacing: 32,
+		tableCell: 12,
 	},
 };
